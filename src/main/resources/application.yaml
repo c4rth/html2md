@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: html-2-md
+
+  main:
+    banner-mode: off
+
+  shell:
+    #interactive.enabled: false
+    history.enabled: false
+    command:
+      history.enabled: false
+      script.enabled: false
+      stacktrace.enabled: false
+      clear.enabled: false
+
+logging:
+  include-application-name: false
+  level:
+    org.carth: debug
+  pattern:
+    console: -%clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(---){faint} %clr(${LOG_CORRELATION_PATTERN:-}){faint}%clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}

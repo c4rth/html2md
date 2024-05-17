@@ -1,0 +1,46 @@
+<ac:layout>
+    <ac:layout-section ac:type="three_with_sidebars">
+        <ac:layout-cell>
+            <table class="wrapped">
+                <colgroup>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                </colgroup>
+                <tbody>
+                <tr>
+                    <th scope="col">Table Heading 1</th>
+                    <th scope="col">Table Heading 2</th>
+                    <th scope="col">Table Heading 3</th>
+                    <th scope="col">Table Heading 4</th>
+                </tr>
+                <tr>
+                    <td>One</td>
+                    <td>Two</td>
+                    <td>Three</td>
+                    <td>Four</td>
+                </tr>
+                <tr>
+                    <td>One </td>
+                    <td>Two</td>
+                    <td colspan="2">Merged Three and Four</td>
+                </tr>
+                <tr>
+                    <td>One</td>
+                    <td rowspan="2">Merged two and two</td>
+                    <td>Three</td>
+                    <td>Four</td>
+                </tr>
+                <tr>
+                    <td>One</td>
+                    <td>Three</td>
+                    <td>Four</td>
+                </tr>
+                </tbody>
+            </table>
+        </ac:layout-cell>
+    </ac:layout-section>
+</ac:layout>
+<hr/>
+<table class="wrapped"><colgroup><col /><col /><col /><col /></colgroup><tbody><tr><th scope="col">Table Heading 1</th><th scope="col">Table Heading 2</th><th scope="col">Table Heading 3</th><th scope="col">Table Heading 4</th></tr><tr><td>One</td><td>Two</td><td>Three</td><td>Four</td></tr><tr><td>One </td><td>Two</td><td colspan="2">Merged Three and Four</td></tr><tr><td>One</td><td rowspan="2">Merged two and two</td><td>Three</td><td>Four</td></tr><tr><td>One</td><td>Three</td><td>Four</td></tr></tbody></table>
