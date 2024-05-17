@@ -20,6 +20,7 @@ public class AcStructuredMacroStatusRule extends Rule {
         Optional<Element> title = element.select("ac|parameter").stream().filter(el -> el.hasAttr("ac:name") && el.attr("ac:name").equals("title")).findFirst();
         String colorPart = color.map(Element::wholeText).orElse("");
         String titlePart = title.map(Element::wholeText).orElse("");
-        return titlePart + (colorPart.isEmpty() ? "" : " {: style=\"color: " + colorPart.toLowerCase() +"\" }");
+        return colorPart.isEmpty() ? titlePart :
+                "<span style=\"background-color:" + colorPart + "; color: white\">" + titlePart + "</span>";
     }
 }

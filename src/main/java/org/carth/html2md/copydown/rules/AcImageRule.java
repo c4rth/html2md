@@ -33,7 +33,7 @@ public class AcImageRule extends Rule {
         String height = cleanAttribute(element.attr("ac:height"));
         String stylePart = "";
         if (!width.isEmpty() || !height.isEmpty()) {
-            stylePart = " {: style=\"";
+            stylePart = "{: style=\"";
             if (!width.isEmpty()) {
                 stylePart += "width: " + width + "px;";
             }
