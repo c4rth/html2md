@@ -9,11 +9,13 @@ public class AcEmoticonRule extends Rule {
     private static final Logger log = LoggerFactory.getLogger(AcEmoticonRule.class);
 
     public AcEmoticonRule() {
-        super("ac:emoticon");
+        super(
+                "ac:emoticon"
+        );
     }
 
     @Override
     public String replacement(String content, Node element) {
-        return ":" + element.attr("ac:name") + ": ";
+        return EmojiMap.getEmoji(element.attr("ac:emoji-id")) + " ";
     }
 }

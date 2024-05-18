@@ -1,5 +1,6 @@
 package org.carth.html2md.command;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.carth.html2md.Html2mdApplication;
 import org.carth.html2md.copydown.CopyDown;
@@ -15,6 +16,7 @@ import java.util.concurrent.Callable;
 @Component
 @Command(name = "convert", mixinStandardHelpOptions = true, sortOptions = false)
 @Slf4j
+@RequiredArgsConstructor
 public class ConvertCommand implements Callable<Integer> {
 
     @Option(order = -100, names = {"-p","--page" }, description = "page id", required = true)
@@ -22,6 +24,8 @@ public class ConvertCommand implements Callable<Integer> {
 
     @Option(order = -99, names = {"-d" }, description = "debug", defaultValue = "false")
     private boolean debug;
+
+    private final CopyDown copyDown;
 
     @Override
     public Integer call() {
@@ -41,8 +45,7 @@ public class ConvertCommand implements Callable<Integer> {
     }
 
     private String convertHtml2Markdown(String html) {
-        CopyDown converter = new CopyDown();
-        return converter.convert(html);
+        return copyDown.convert(html);
     }
 
     private void setLogLevel(boolean debug) {
