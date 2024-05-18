@@ -30,15 +30,15 @@ public class ConvertCommand implements Callable<Integer> {
     public Integer call() {
         setLogLevel(debug);
         String filename = page + ".txt";
-        log.info("Converting '%s' to markdown.".formatted(filename));
+        log.info("Converting '{}' to markdown.",filename);
         String html = FileUtils.readFile("./files/source/" + filename);
         if (html == null) {
-            log.error("'%s' not found or empty".formatted(filename));
+            log.error("'{}' not found or empty", filename);
             return -1;
         }
         String markdown = convertHtml2Markdown(filename, html);
         String outputFilename = FileUtils.writeFile("./files/result/" + filename, markdown);
-        log.info("Converted markdown: " + outputFilename);
+        log.info("Converted markdown: {}", outputFilename);
         ConversionReport.getInstance().report();
         log.info("Done");
         return 0;
@@ -50,7 +50,6 @@ public class ConvertCommand implements Callable<Integer> {
     }
 
     private void setLogLevel(boolean debug) {
-        log.info("debug? " + debug);
         LoggingSystem system = LoggingSystem.get(Html2mdApplication.class.getClassLoader());
         system.setLogLevel("org.carth", debug ? LogLevel.TRACE : LogLevel.INFO);
     }

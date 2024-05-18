@@ -9,7 +9,7 @@ import java.util.List;
 
 @Slf4j
 public class Rules {
-    public List<Rule> rules;
+    public final List<Rule> rules;
 
     public Rules(List<String> references) {
         this.rules = new ArrayList<>();
@@ -54,11 +54,11 @@ public class Rules {
     public Rule findRule(Node node, Options options) {
         for (Rule rule : rules) {
             if (rule.getFilter().test(node, options)) {
-                log.trace("tag: '" + node.nodeName() + "' -> rule: '" + rule.getName() + "'");
+                log.trace("tag: '{}' -> rule: '{}'", node.nodeName(), rule.getName());
                 return rule;
             }
         }
-        log.trace("tag: '" + node.nodeName() + "' -> NO rule'");
+        log.trace("tag: '{}' -> rule: NO rule found", node.nodeName());
         return null;
     }
 

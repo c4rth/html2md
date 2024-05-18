@@ -9,6 +9,7 @@ public class ListRule extends Rule {
                 new String[]{"ul", "ol"},
                 (content, node, options) -> {
                     Element parent = (Element) node.parentNode();
+                    assert parent != null;
                     if (parent.nodeName().equals("li") && parent.child(parent.childrenSize() - 1) == node) {
                         return "\n" + content;
                     } else {

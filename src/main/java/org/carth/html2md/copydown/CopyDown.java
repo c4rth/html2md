@@ -1,7 +1,6 @@
 package org.carth.html2md.copydown;
 
 import org.carth.html2md.copydown.rules.Rule;
-import org.carth.html2md.report.ConversionReport;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 
@@ -112,14 +111,7 @@ public class CopyDown {
         return string;
     }
 
-    private static class Escape {
-        String pattern;
-        String replace;
-
-        public Escape(String pattern, String replace) {
-            this.pattern = pattern;
-            this.replace = replace;
-        }
+    private record Escape(String pattern, String replace) {
     }
 
 }

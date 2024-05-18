@@ -22,7 +22,7 @@ public class Html2MdApplicationRunner implements CommandLineRunner, ExitCodeGene
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args)  {
         exitCode = new CommandLine(convertCommand, factory).execute(args);
     }
 

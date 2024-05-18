@@ -33,7 +33,7 @@ public class CopyNode {
     private static Set<String> MEANINGFUL_WHEN_BLANK_ELEMENTS_SET = null;
     private static Set<String> BLOCK_ELEMENTS_SET = null;
 
-    Node node;
+    final Node node;
     CopyNode parent;
 
     CopyNode(String input) {
@@ -43,6 +43,7 @@ public class CopyNode {
                 // a single element.
                 "<x-copydown id=\"copydown-root\">" + input + "</x-copydown>");
         Element root = document.getElementById("copydown-root");
+        assert root != null;
         new WhitespaceCollapser().collapse(root);
         this.node = root;
     }

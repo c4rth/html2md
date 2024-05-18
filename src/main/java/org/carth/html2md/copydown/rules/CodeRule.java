@@ -9,6 +9,7 @@ public class CodeRule extends Rule {
         setRule(
                 (element, options) -> {
                     boolean hasSiblings = element.previousSibling() != null || element.nextSibling() != null;
+                    assert element.parentNode() != null;
                     boolean isCodeBlock = element.parentNode().nodeName().equals("pre") && !hasSiblings;
                     return element.nodeName().equals("code") && !isCodeBlock;
                 },
@@ -29,14 +30,11 @@ public class CodeRule extends Rule {
                             trailingSpace = " ";
                         }
                         int counter = 1;
-                        if (delimiter.equals(matcher.group())) {
-                            counter++;
-                        }
-                        while (matcher.find()) {
+                        do {
                             if (delimiter.equals(matcher.group())) {
                                 counter++;
                             }
-                        }
+                        } while (matcher.find());
                         delimiter = String.join("", Collections.nCopies(counter, "`"));
                     }
                     return delimiter + leadingSpace + content + trailingSpace + delimiter;

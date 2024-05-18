@@ -1,18 +1,8 @@
 spring:
   application:
-    name: html-2-md
-
+    name: html2md
   main:
     banner-mode: off
-
-  shell:
-    #interactive.enabled: false
-    history.enabled: false
-    command:
-      history.enabled: false
-      script.enabled: false
-      stacktrace.enabled: false
-      clear.enabled: false
 
 logging:
   include-application-name: false

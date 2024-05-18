@@ -30,7 +30,7 @@ public class TableRule extends Rule {
 
     private String table(String content, Node node) {
         if (isNestedTable(node)) {
-            return node.outerHtml().trim().replaceAll("\n","");
+            return node.outerHtml().trim().replaceAll("\n", "");
         }
         return content;
     }
@@ -57,6 +57,7 @@ public class TableRule extends Rule {
             String colspanContent = borderCell ? " " + content + " |" : " |";
             result.append(colspanContent.repeat(Math.max(0, colspan)));
         } catch (NumberFormatException e) {
+            // empty
         }
         return result.toString();
     }

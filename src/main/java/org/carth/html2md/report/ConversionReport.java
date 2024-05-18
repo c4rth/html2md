@@ -10,7 +10,7 @@ import java.util.Map;
 @Slf4j
 public class ConversionReport {
     private static ConversionReport instance = null;
-    private Map<String, List<Report>> reports = new HashMap<>();
+    private final Map<String, List<Report>> reports = new HashMap<>();
     private String current = "";
 
     private ConversionReport() {
@@ -38,12 +38,12 @@ public class ConversionReport {
 
     public void report() {
         log.info("Conversion report:");
-        reports.forEach((k, v) -> {
-            log.info("- " + k + ":");
-            if (v.isEmpty()) {
+        reports.forEach((key, value) -> {
+            log.info("- {}:", key);
+            if (value.isEmpty()) {
                 log.info("  ✅ OK");
             } else {
-                v.forEach(report -> {
+                value.forEach(report -> {
                     if (report.type() == ReportType.ERROR) {
                         log.info(" ⛔ {}", report.description());
                     } else {

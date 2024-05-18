@@ -17,6 +17,7 @@ public class ListItemRule extends Rule {
                             .replaceAll("(?m)\n", "\n    "); // indent
                     String prefix = options.bulletListMaker + "   ";
                     Element parent = (Element) node.parentNode();
+                    assert parent != null;
                     if (parent.nodeName().equals("ol")) {
                         String start = parent.attr("start");
                         int index = parent.children().indexOf(node);

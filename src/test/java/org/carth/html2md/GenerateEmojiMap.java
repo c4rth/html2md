@@ -41,7 +41,7 @@ public class GenerateEmojiMap {
         node.fields().forEachRemaining(f -> {
                     var key = f.getKey();
                     var unicode = f.getValue().get("unicode").asText();
-                    log.info(unicode + "=" + key);
+                    log.info("{} = {}", unicode, key);
                     staticBlockBuilder.addStatement("EMOJI_MAP.put($S,$S)", unicode, key);
                 }
         );
