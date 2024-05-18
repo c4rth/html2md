@@ -6,16 +6,16 @@ import org.jsoup.nodes.Node;
 // Methods missing from jsoup
 class NodeUtils {
 
-    static boolean isNodeType1(Node node) {
+    static boolean isNodeTypeElement(Node node) {
         return node instanceof Element;
     }
 
-    static boolean isNodeType3(Node node) {
+    static boolean isNodeTypeText(Node node) {
         return node.nodeName().equals("text") || node.nodeName().equals("#text");
     }
 
     // CDATA section node
-    static boolean isNodeType4(Node node) {
+    static boolean isNodeTypeCData(Node node) {
         return node.nodeName().equals("#cdata");
     }
 }

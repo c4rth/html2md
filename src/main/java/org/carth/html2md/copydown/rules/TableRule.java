@@ -2,6 +2,7 @@ package org.carth.html2md.copydown.rules;
 
 import lombok.extern.slf4j.Slf4j;
 import org.carth.html2md.copydown.Options;
+import org.carth.html2md.report.ConversionReport;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 
@@ -13,17 +14,37 @@ public class TableRule extends Rule {
 
     public TableRule() {
         setRule(
-                new String[]{"th", "td", "tr", "thead", "tbody", "tfoot"},
+                new String[]{"table", "th", "td", "tr", "thead", "tbody", "tfoot"},
                 this::replace
         );
     }
 
     public String replace(String content, Node node, Options options) {
         return switch (node.nodeName()) {
+            case "table" -> table(content, node);
             case "th", "td" -> cell(content, node, false);
             case "tr" -> row(content, node);
             default -> content;
         };
+    }
+
+    private String table(String content, Node node) {
+        if (isNestedTable(node)) {
+            return node.outerHtml().trim().replaceAll("\n","");
+        }
+        return content;
+    }
+
+    private boolean isNestedTable(Node node) {
+        var parent = node.parent();
+        while (parent != null) {
+            if (parent.nodeName().equals("table")) {
+                ConversionReport.getInstance().addError("Nested table is not converted");
+                return true;
+            }
+            parent = parent.parent();
+        }
+        return false;
     }
 
     private String cell(String content, Node node, boolean borderCell) {

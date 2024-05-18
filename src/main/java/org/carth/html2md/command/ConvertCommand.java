@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.carth.html2md.Html2mdApplication;
 import org.carth.html2md.copydown.CopyDown;
+import org.carth.html2md.report.ConversionReport;
 import org.carth.html2md.utils.FileUtils;
 import org.springframework.boot.logging.LogLevel;
 import org.springframework.boot.logging.LoggingSystem;
@@ -35,14 +36,16 @@ public class ConvertCommand implements Callable<Integer> {
             log.error("'%s' not found or empty".formatted(filename));
             return -1;
         }
-        String markdown = convertHtml2Markdown(html);
+        String markdown = convertHtml2Markdown(filename, html);
         String outputFilename = FileUtils.writeFile("./files/result/" + filename, markdown);
         log.info("Converted markdown: " + outputFilename);
+        ConversionReport.getInstance().report();
         log.info("Done");
         return 0;
     }
 
-    private String convertHtml2Markdown(String html) {
+    private String convertHtml2Markdown(String name, String html) {
+        ConversionReport.getInstance().newPage(name);
         return copyDown.convert(html);
     }
 

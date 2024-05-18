@@ -174,11 +174,11 @@ public class CopyNode {
         if (sibling == null) {
             return false;
         }
-        if (NodeUtils.isNodeType3(sibling)) {
+        if (NodeUtils.isNodeTypeText(sibling)) {
             // TODO fix. Originally sibling.nodeValue
             return Pattern.compile(regex).matcher(sibling.outerHtml()).find();
         }
-        if (NodeUtils.isNodeType1(sibling)) {
+        if (NodeUtils.isNodeTypeElement(sibling)) {
             // TODO fix. Originally textContent
             return Pattern.compile(regex).matcher(sibling.outerHtml()).find();
         }

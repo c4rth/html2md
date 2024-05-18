@@ -1,0 +1,34 @@
+<h1>First child</h1>
+<h2>Tabs</h2>
+<ac:structured-macro ac:macro-id="472ffe1e-ca7c-47c7-94e9-388670ebb2c2" ac:name="tabs-group" ac:schema-version="1">
+    <ac:parameter ac:name="disposition">horizontal</ac:parameter>
+    <ac:rich-text-body>
+        <ac:structured-macro ac:macro-id="27072383-655f-4b54-a170-fb92ea51e3ce" ac:name="tab-pane"
+                             ac:schema-version="1">
+            <ac:parameter ac:name="anchor">2598748</ac:parameter>
+            <ac:parameter ac:name="icon">icon-sp-info-circled</ac:parameter>
+            <ac:parameter ac:name="name">Tab1</ac:parameter>
+            <ac:rich-text-body>
+                <p><b>Tab content 1</b></p>
+                <ul>
+                    <li>title: Tab1</li>
+                    <li>icon: info-circle</li>
+                </ul>
+            </ac:rich-text-body>
+        </ac:structured-macro>
+        <ac:structured-macro ac:macro-id="4798b028-8d77-4bd4-9d62-1e3b04feec25" ac:name="tab-pane"
+                             ac:schema-version="1">
+            <ac:parameter ac:name="icon">icon-sp-ok-circled</ac:parameter>
+            <ac:parameter ac:name="name">Tab2</ac:parameter>
+            <ac:parameter ac:name="anchor">2598749</ac:parameter>
+            <ac:rich-text-body>
+                <p><b>Tab content 2</b></p>
+                <ul>
+                    <li>title: Tab2</li>
+                    <li>icon: ok-circle</li>
+                </ul>
+            </ac:rich-text-body>
+        </ac:structured-macro>
+    </ac:rich-text-body>
+</ac:structured-macro>
+<p><br/></p>

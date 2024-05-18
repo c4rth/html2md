@@ -1,6 +1,7 @@
 package org.carth.html2md.copydown;
 
 import org.carth.html2md.copydown.rules.Rule;
+import org.carth.html2md.report.ConversionReport;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 
@@ -36,7 +37,6 @@ public class CopyDown {
 
     public CopyDown() {
         this.options = Options.builder().build();
-        ;
         setUp();
     }
 
@@ -45,9 +45,9 @@ public class CopyDown {
         setUp();
     }
 
-    public String convert(String input) {
+    public String convert(String content) {
         references = new ArrayList<>();
-        CopyNode copyRootNode = new CopyNode(input);
+        CopyNode copyRootNode = new CopyNode(content);
         String result = process(copyRootNode);
         return postProcess(result);
     }
@@ -71,10 +71,10 @@ public class CopyDown {
         for (Node child : node.node.childNodes()) {
             CopyNode copyNodeChild = new CopyNode(child, node);
             String replacement = "";
-            if (NodeUtils.isNodeType3(child)) {
+            if (NodeUtils.isNodeTypeText(child)) {
                 // TODO it should be child.nodeValue
                 replacement = copyNodeChild.isCode() ? ((TextNode) child).text() : escape(((TextNode) child).text());
-            } else if (NodeUtils.isNodeType1(child)) {
+            } else if (NodeUtils.isNodeTypeElement(child)) {
                 replacement = replacementForNode(copyNodeChild);
             }
             result = join(result, replacement);

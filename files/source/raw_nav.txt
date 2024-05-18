@@ -1,0 +1,26 @@
+<h1>Second child</h1>
+<h2>Nav Group</h2
+><p><br/></p>
+<ac:structured-macro ac:macro-id="dd79812d-141b-4603-a862-9b59eeb702a3" ac:name="horizontal-nav-group"
+                     ac:schema-version="1">
+    <ac:rich-text-body>
+        <ac:structured-macro ac:macro-id="520dd6b1-6b5c-4097-8237-7ebb3e7ee95c" ac:name="horizontal-nav-item"
+                             ac:schema-version="1">
+            <ac:parameter ac:name="anchor">1643868095</ac:parameter>
+            <ac:parameter ac:name="icon">icon-sp-info-circled</ac:parameter>
+            <ac:parameter ac:name="name">Nav Item 1</ac:parameter>
+            <ac:rich-text-body><p>Nav Item</p>
+                <p>title: Nav Item 1</p>
+                <p>icon: info-cirlce</p></ac:rich-text-body>
+        </ac:structured-macro>
+        <ac:structured-macro ac:macro-id="7d637cb5-5399-4d9c-bca4-481f5f26e133" ac:name="horizontal-nav-item"
+                             ac:schema-version="1">
+            <ac:parameter ac:name="icon">icon-sp-ok-circled</ac:parameter>
+            <ac:parameter ac:name="name">Nav Item 2</ac:parameter>
+            <ac:parameter ac:name="anchor">1643868094</ac:parameter>
+            <ac:rich-text-body><p>Nav Item</p>
+                <p>title: Nav Item 2</p>
+                <p>icon: ok-cirlce</p></ac:rich-text-body>
+        </ac:structured-macro>
+    </ac:rich-text-body>
+</ac:structured-macro><p><br/></p>

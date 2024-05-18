@@ -16,7 +16,6 @@ public class AcStructuredMacroTabNavRule extends Rule {
                 },
                 (content, node, options) -> {
                     Element element = (Element) node;
-
                     Optional<Element> title = element.select("ac|parameter").stream().filter(el -> el.hasAttr("ac:name") && el.attr("ac:name").equals("name")).findFirst();
                     String titlePart = title.map(Element::text).orElse("Tab");
                     return "\n=== \"<span style=\"font-size: 1rem\">" + titlePart + "</span>\"" + content.replaceAll("\n", "\n    ");

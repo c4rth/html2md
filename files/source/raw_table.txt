@@ -39,6 +39,33 @@
                 </tr>
                 </tbody>
             </table>
+            <hr />
+
+            <table>
+            <tr>
+                <td>Column 1</td>
+                <td>Column 2</td>
+            </tr>
+              <tr>
+                <td>Cell</td>
+                <td>Nested Table
+                  <table>
+                    <tr>
+                      <td>Cell 1</td>
+                    </tr>
+                    <tr>
+                      <td>Cell 2</td>
+                    </tr>
+                    <tr>
+                      <td>Cell 3</td>
+                    </tr>
+                    <tr>
+                      <td>Cell 4</td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
         </ac:layout-cell>
     </ac:layout-section>
 </ac:layout>
