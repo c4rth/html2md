@@ -33,7 +33,7 @@ public class CopyNode {
     private static Set<String> MEANINGFUL_WHEN_BLANK_ELEMENTS_SET = null;
     private static Set<String> BLOCK_ELEMENTS_SET = null;
 
-    Node element;
+    Node node;
     CopyNode parent;
 
     CopyNode(String input) {
@@ -44,27 +44,27 @@ public class CopyNode {
                 "<x-copydown id=\"copydown-root\">" + input + "</x-copydown>");
         Element root = document.getElementById("copydown-root");
         new WhitespaceCollapser().collapse(root);
-        element = root;
+        this.node = root;
     }
 
     CopyNode(Node node, CopyNode parent) {
-        element = node;
+        this.node = node;
         this.parent = parent;
     }
 
-    public static boolean isBlank(Node element) {
+    public static boolean isBlank(Node node) {
         String textContent;
-        if (element instanceof Element) {
-            textContent = ((Element) element).wholeText();
+        if (node instanceof Element) {
+            textContent = ((Element) node).wholeText();
         } else {
-            textContent = element.outerHtml();
+            textContent = node.outerHtml();
         }
-        return !isVoid(element) &&
-                !isMeaningfulWhenBlank(element) &&
+        return !isVoid(node) &&
+                !isMeaningfulWhenBlank(node) &&
                 // TODO check text is the same as textContent in browser
                 Pattern.compile("(?i)^\\s*$").matcher(textContent).find() &&
-                !hasVoidNodesSet(element) &&
-                !hasMeaningfulWhenBlankNodesSet(element);
+                !hasVoidNodesSet(node) &&
+                !hasMeaningfulWhenBlankNodesSet(node);
     }
 
     private static boolean hasVoidNodesSet(Node node) {
@@ -80,8 +80,8 @@ public class CopyNode {
         return false;
     }
 
-    public static boolean isVoid(Node element) {
-        return getVoidNodesSet().contains(element.nodeName());
+    public static boolean isVoid(Node node) {
+        return getVoidNodesSet().contains(node.nodeName());
     }
 
     private static Set<String> getVoidNodesSet() {
@@ -104,8 +104,8 @@ public class CopyNode {
         return false;
     }
 
-    private static boolean isMeaningfulWhenBlank(Node element) {
-        return getMeaningfulWhenBlankNodesSet().contains(element.nodeName());
+    private static boolean isMeaningfulWhenBlank(Node node) {
+        return getMeaningfulWhenBlankNodesSet().contains(node.nodeName());
     }
 
     private static Set<String> getMeaningfulWhenBlankNodesSet() {
@@ -116,8 +116,8 @@ public class CopyNode {
         return MEANINGFUL_WHEN_BLANK_ELEMENTS_SET;
     }
 
-    public static boolean isBlock(Node element) {
-        return getBlockNodesSet().contains(element.nodeName());
+    public static boolean isBlock(Node node) {
+        return getBlockNodesSet().contains(node.nodeName());
     }
 
     private static Set<String> getBlockNodesSet() {
@@ -130,18 +130,18 @@ public class CopyNode {
 
     public boolean isCode() {
         // TODO cache in property to avoid escalating to root
-        return element.nodeName().equals("code") || (parent != null && parent.isCode());
+        return this.node.nodeName().equals("code") || (parent != null && parent.isCode());
     }
 
     public FlankingWhiteSpaces flankingWhitespace() {
         String leading = "";
         String trailing = "";
-        if (!isBlock(element)) {
+        if (!isBlock(this.node)) {
             String textContent;
-            if (element instanceof Element) {
-                textContent = ((Element) element).wholeText();
+            if (this.node instanceof Element) {
+                textContent = ((Element) this.node).wholeText();
             } else {
-                textContent = element.outerHtml();
+                textContent = this.node.outerHtml();
             }
             // Don't put extra spaces for a line break
             if (textContent.equals("\n")) {
@@ -151,7 +151,7 @@ public class CopyNode {
             boolean hasLeading = Pattern.compile("^\\s").matcher(textContent).find();
             boolean hasTrailing = Pattern.compile("\\s$").matcher(textContent).find();
             // TODO maybe make node property and avoid recomputing
-            boolean blankWithSpaces = isBlank(element) && hasLeading && hasTrailing;
+            boolean blankWithSpaces = isBlank(this.node) && hasLeading && hasTrailing;
             if (hasLeading && !isLeftFlankedByWhitespaces()) {
                 leading = " ";
             }
@@ -163,11 +163,11 @@ public class CopyNode {
     }
 
     private boolean isLeftFlankedByWhitespaces() {
-        return isChildFlankedByWhitespaces(" $", element.previousSibling());
+        return isChildFlankedByWhitespaces(" $", this.node.previousSibling());
     }
 
     private boolean isRightFlankedByWhitespaces() {
-        return isChildFlankedByWhitespaces("^ ", element.nextSibling());
+        return isChildFlankedByWhitespaces("^ ", this.node.nextSibling());
     }
 
     private boolean isChildFlankedByWhitespaces(String regex, Node sibling) {

@@ -98,7 +98,6 @@ class WhitespaceCollapser {
     /**
      * remove(node) removes the given node from the DOM and returns the
      * next node in the sequence.
-     *
      */
     private Node remove(Node node) {
         Node next = node.nextSibling() != null ? node.nextSibling() : node.parentNode();
@@ -123,19 +122,19 @@ class WhitespaceCollapser {
         return current.parentNode();
     }
 
-    private boolean isPre(Node element) {
+    private boolean isPre(Node node) {
         // TODO allow to override with lambda in options
-        return element.nodeName().equals("pre");
+        return node.nodeName().equals("pre");
     }
 
-    private boolean isBlock(Node element) {
+    private boolean isBlock(Node node) {
         // TODO allow to override with lambda in options
-        return CopyNode.isBlock(element) || element.nodeName().equals("br");
+        return CopyNode.isBlock(node) || node.nodeName().equals("br");
     }
 
-    private boolean isVoid(Node element) {
+    private boolean isVoid(Node node) {
         // Allow to override
-        return CopyNode.isVoid(element);
+        return CopyNode.isVoid(node);
     }
 
 }

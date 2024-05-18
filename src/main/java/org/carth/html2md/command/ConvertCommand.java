@@ -19,26 +19,24 @@ import java.util.concurrent.Callable;
 @RequiredArgsConstructor
 public class ConvertCommand implements Callable<Integer> {
 
-    @Option(order = -100, names = {"-p","--page" }, description = "page id", required = true)
-    private String page;
-
-    @Option(order = -99, names = {"-d" }, description = "debug", defaultValue = "false")
-    private boolean debug;
-
     private final CopyDown copyDown;
+    @Option(order = -100, names = {"-p", "--page"}, description = "page id", required = true)
+    private String page;
+    @Option(order = -99, names = {"-d"}, description = "debug", defaultValue = "false")
+    private boolean debug;
 
     @Override
     public Integer call() {
         setLogLevel(debug);
         String filename = page + ".txt";
         log.info("Converting '%s' to markdown.".formatted(filename));
-        String html = FileUtils.readFile("./src/main/resources/source/" + filename);
+        String html = FileUtils.readFile("./files/source/" + filename);
         if (html == null) {
             log.error("'%s' not found or empty".formatted(filename));
             return -1;
         }
         String markdown = convertHtml2Markdown(html);
-        String outputFilename = FileUtils.writeFile(filename, markdown);
+        String outputFilename = FileUtils.writeFile("./files/result/" + filename, markdown);
         log.info("Converted markdown: " + outputFilename);
         log.info("Done");
         return 0;
@@ -49,7 +47,7 @@ public class ConvertCommand implements Callable<Integer> {
     }
 
     private void setLogLevel(boolean debug) {
-        log.info("debug? "+debug);
+        log.info("debug? " + debug);
         LoggingSystem system = LoggingSystem.get(Html2mdApplication.class.getClassLoader());
         system.setLogLevel("org.carth", debug ? LogLevel.TRACE : LogLevel.INFO);
     }

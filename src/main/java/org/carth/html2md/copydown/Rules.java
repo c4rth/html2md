@@ -1,34 +1,33 @@
 package org.carth.html2md.copydown;
 
+import lombok.extern.slf4j.Slf4j;
 import org.carth.html2md.copydown.rules.*;
 import org.jsoup.nodes.Node;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 public class Rules {
-    private static final Logger log = LoggerFactory.getLogger(Rules.class);
     public List<Rule> rules;
 
-    public Rules(Options options, List<String> references) {
+    public Rules(List<String> references) {
         this.rules = new ArrayList<>();
 
         // html
         addRule("paragraph", new ParagraphRule());
-        addRule("br", new BrRule(options));
-        addRule("heading", new HeadingRule(options));
+        addRule("br", new BrRule());
+        addRule("heading", new HeadingRule());
         addRule("blockquote", new BlockquoteRule());
         addRule("list", new ListRule());
-        addRule("listItem", new ListItemRule(options));
-        addRule("indentedCodeBlock", new IndentedCodeBlockRule(options));
-        addRule("fencedCodeBock", new FencedCodeBock(options));
-        addRule("horizontalRule", new HorizontalRule(options));
-        addRule("inlineLink", new InlineLinkRule(options));
-        addRule("referenceLink", new ReferenceLinkRule(options, references));
-        addRule("emphasis", new EmphasisRule(options));
-        addRule("strong", new StrongRule(options));
+        addRule("listItem", new ListItemRule());
+        addRule("indentedCodeBlock", new IndentedCodeBlockRule());
+        addRule("fencedCodeBock", new FencedCodeBock());
+        addRule("horizontalRule", new HorizontalRule());
+        addRule("inlineLink", new InlineLinkRule());
+        addRule("referenceLink", new ReferenceLinkRule(references));
+        addRule("emphasis", new EmphasisRule());
+        addRule("strong", new StrongRule());
         addRule("code", new CodeRule());
         addRule("img", new ImageRule());
         addRule("table", new TableRule());
@@ -40,20 +39,21 @@ public class Rules {
         addRule("acStructuredMacroTabNav", new AcStructuredMacroTabNavRule());
         addRule("acStructuredMacroAdmonition", new AcStructuredMacroAdmonitionRule());
         addRule("acStructuredMacroStatus", new AcStructuredMacroStatusRule());
-        addRule("acStructuredMacroCode", new AcStructuredMacroCodeRule(options));
+        addRule("acStructuredMacroCode", new AcStructuredMacroCodeRule());
         addRule("acStructuredMacroGliffy", new AcStructuredMacroGliffyRule());
         addRule("acTask", new AcTaskRule());
         addRule("acParameter", new AcParameterRule());
         addRule("acStructuredMacro", new AcStructuredMacroRule());
         addRule("acDefault", new AcDefaultRule());
         addRule("acBlank", new AcBlankRule());
+        // others
         addRule("blankReplacement", new BlankReplacementRule());
         addRule("default", new DefaultRule());
     }
 
-    public Rule findRule(Node node) {
+    public Rule findRule(Node node, Options options) {
         for (Rule rule : rules) {
-            if (rule.getFilter().test(node)) {
+            if (rule.getFilter().test(node, options)) {
                 log.trace("tag: '" + node.nodeName() + "' -> rule: '" + rule.getName() + "'");
                 return rule;
             }

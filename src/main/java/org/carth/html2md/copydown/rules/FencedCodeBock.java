@@ -11,21 +11,18 @@ import java.util.regex.Pattern;
 
 public class FencedCodeBock extends Rule {
 
-    private final String fence;
-
-    public FencedCodeBock(Options options) {
-        super(
-                (element) -> options.codeBlockStyle == CodeBlockStyle.FENCED
+    public FencedCodeBock() {
+        setRule(
+                (element, options) -> options.codeBlockStyle == CodeBlockStyle.FENCED
                         && element.nodeName().equals("pre")
                         && element.childNodeSize() > 0
-                        && element.childNode(0).nodeName().equals("code")
+                        && element.childNode(0).nodeName().equals("code"),
+                this::replace
         );
-        this.fence = options.fence;
     }
 
-    @Override
-    public String replacement(String content, Node element) {
-        String childClass = element.childNode(0).attr("class");
+    private String replace(String content, Node node, Options options) {
+        String childClass = node.childNode(0).attr("class");
         if (childClass == null) {
             childClass = "";
         }
@@ -36,13 +33,13 @@ public class FencedCodeBock extends Rule {
         }
 
         String code;
-        if (element.childNode(0) instanceof Element) {
-            code = ((Element) element.childNode(0)).wholeText();
+        if (node.childNode(0) instanceof Element) {
+            code = ((Element) node.childNode(0)).wholeText();
         } else {
-            code = element.childNode(0).outerHtml();
+            code = node.childNode(0).outerHtml();
         }
 
-        String fenceChar = fence.substring(0, 1);
+        String fenceChar = options.fence.substring(0, 1);
         int fenceSize = 3;
         Matcher fenceMatcher = Pattern.compile("(?m)^(" + fenceChar + "{3,})").matcher(content);
         while (fenceMatcher.find()) {

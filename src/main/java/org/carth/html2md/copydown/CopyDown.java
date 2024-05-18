@@ -3,8 +3,6 @@ package org.carth.html2md.copydown;
 import org.carth.html2md.copydown.rules.Rule;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +15,6 @@ public class CopyDown {
 
     private static final Pattern leadingNewLinePattern = Pattern.compile("^(\n*)");
     private static final Pattern trailingNewLinePattern = Pattern.compile("(\n*)$");
-    private static final Logger log = LoggerFactory.getLogger(CopyDown.class);
     private final Options options;
     private final List<Escape> escapes = Arrays.asList(
             new Escape("\\\\", "\\\\\\\\"),
@@ -38,7 +35,8 @@ public class CopyDown {
     private List<String> references;
 
     public CopyDown() {
-        this.options = OptionsBuilder.anOptions().build();
+        this.options = Options.builder().build();
+        ;
         setUp();
     }
 
@@ -56,13 +54,13 @@ public class CopyDown {
 
     private void setUp() {
         references = new ArrayList<>();
-        rules = new Rules(options, references);
+        rules = new Rules(references);
     }
 
     private String postProcess(String output) {
         for (Rule rule : rules.rules) {
             if (rule.getAppend() != null) {
-                output = join(output, rule.getAppend().get());
+                output = join(output, rule.getAppend().apply(options));
             }
         }
         return output.replaceAll("^[\\t\\n\\r]+", "").replaceAll("[\\t\\r\\n\\s]+$", "");
@@ -70,7 +68,7 @@ public class CopyDown {
 
     private String process(CopyNode node) {
         String result = "";
-        for (Node child : node.element.childNodes()) {
+        for (Node child : node.node.childNodes()) {
             CopyNode copyNodeChild = new CopyNode(child, node);
             String replacement = "";
             if (NodeUtils.isNodeType3(child)) {
@@ -85,13 +83,13 @@ public class CopyDown {
     }
 
     private String replacementForNode(CopyNode node) {
-        Rule rule = rules.findRule(node.element);
+        Rule rule = rules.findRule(node.node, options);
         String content = process(node);
         CopyNode.FlankingWhiteSpaces flankingWhiteSpaces = node.flankingWhitespace();
         if (!flankingWhiteSpaces.getLeading().isEmpty() || !flankingWhiteSpaces.getTrailing().isEmpty()) {
             content = content.trim();
         }
-        content = flankingWhiteSpaces.getLeading() + rule.replacement(content, node.element) + flankingWhiteSpaces.getTrailing();
+        content = flankingWhiteSpaces.getLeading() + rule.getReplace().supply(content, node.node, options) + flankingWhiteSpaces.getTrailing();
         return content;
     }
 

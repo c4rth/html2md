@@ -32,5 +32,5 @@ build/
 .vscode/
 
 ###
-**/resources/source.test/
-**/resources/results/
+files/source.private/
+files/result.private/

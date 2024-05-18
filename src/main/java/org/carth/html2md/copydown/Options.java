@@ -1,10 +1,12 @@
 package org.carth.html2md.copydown;
 
+import lombok.Builder;
 import org.carth.html2md.copydown.style.CodeBlockStyle;
 import org.carth.html2md.copydown.style.HeadingStyle;
 import org.carth.html2md.copydown.style.LinkReferenceStyle;
 import org.carth.html2md.copydown.style.LinkStyle;
 
+@Builder
 public class Options {
     public final String br;
     public final String hr;

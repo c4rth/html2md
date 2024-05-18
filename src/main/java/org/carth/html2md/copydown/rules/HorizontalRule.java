@@ -1,19 +1,12 @@
 package org.carth.html2md.copydown.rules;
 
-import org.carth.html2md.copydown.Options;
-import org.jsoup.nodes.Node;
-
 public class HorizontalRule extends Rule {
 
-    private final String hr;
-
-    public HorizontalRule(Options options) {
-        super("hr");
-        this.hr = options.hr;
+    public HorizontalRule() {
+        setRule(
+                "hr",
+                (content, node, options) -> "\n\n" + options.hr + "\n\n"
+        );
     }
 
-    @Override
-    public String replacement(String content, Node element) {
-        return "\n\n" + hr + "\n\n";
-    }
 }
