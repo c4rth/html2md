@@ -6,7 +6,7 @@ import org.jsoup.nodes.Node;
 
 import java.util.List;
 
-import static org.carth.html2md.utils.MarkdownUtils.cleanAttribute;
+import static org.carth.html2md.copydown.CopyNode.cleanAttribute;
 
 public class ReferenceLinkRule extends Rule {
 

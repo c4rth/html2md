@@ -1,6 +1,6 @@
 package org.carth.html2md.copydown.rules;
 
-import org.carth.html2md.utils.AcNodeUtils;
+import org.carth.html2md.copydown.CopyNode;
 import org.jsoup.nodes.Element;
 
 import java.util.Optional;
@@ -8,7 +8,7 @@ import java.util.Optional;
 public class AcStructuredMacroGliffyRule extends Rule {
     public AcStructuredMacroGliffyRule() {
         setRule(
-                (node, options) -> AcNodeUtils.isAcMacroWithName(node, "gliffy"),
+                (node, options) -> CopyNode.isAcMacroWithName(node, "gliffy"),
                 (content, node, options) -> {
                     Element element = (Element) node;
                     Optional<Element> alt = element.select("ac|parameter").stream().filter(el -> el.hasAttr("ac:name") && el.attr("ac:name").equals("displayName")).findFirst();

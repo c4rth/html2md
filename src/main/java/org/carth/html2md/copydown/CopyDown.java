@@ -4,7 +4,6 @@ import org.carth.html2md.copydown.rules.Rule;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -67,10 +66,10 @@ public class CopyDown {
         for (Node child : node.node.childNodes()) {
             CopyNode copyNodeChild = new CopyNode(child, node);
             String replacement = "";
-            if (NodeUtils.isNodeTypeText(child)) {
+            if (JsoupUtils.isNodeTypeText(child)) {
                 // TODO it should be child.nodeValue
                 replacement = copyNodeChild.isCode() ? ((TextNode) child).text() : escape(((TextNode) child).text());
-            } else if (NodeUtils.isNodeTypeElement(child)) {
+            } else if (JsoupUtils.isNodeTypeElement(child)) {
                 replacement = replacementForNode(copyNodeChild);
             }
             result = join(result, replacement);
@@ -82,10 +81,10 @@ public class CopyDown {
         Rule rule = rules.findRule(node.node, options);
         String content = process(node);
         CopyNode.FlankingWhiteSpaces flankingWhiteSpaces = node.flankingWhitespace();
-        if (!flankingWhiteSpaces.getLeading().isEmpty() || !flankingWhiteSpaces.getTrailing().isEmpty()) {
+        if (!flankingWhiteSpaces.leading().isEmpty() || !flankingWhiteSpaces.trailing().isEmpty()) {
             content = content.trim();
         }
-        content = flankingWhiteSpaces.getLeading() + rule.getReplace().apply(content, node.node, options) + flankingWhiteSpaces.getTrailing();
+        content = flankingWhiteSpaces.leading() + rule.getReplace().apply(content, node.node, options) + flankingWhiteSpaces.trailing();
         return content;
     }
 

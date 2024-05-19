@@ -7,6 +7,7 @@ import org.jsoup.nodes.Node;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -108,6 +109,18 @@ public class CopyNode {
         return node.nodeName().startsWith("ac:") || node.nodeName().startsWith("ri:");
     }
 
+    public static Optional<Element> getAcParametertWithName(Element element, String attributeValue) {
+        return element.select("ac|parameter").stream().filter(el -> el.hasAttr("ac:name") && el.attr("ac:name").equals(attributeValue)).findFirst();
+    }
+
+    public static boolean isAcMacroWithName(Node node, String... attrValues) {
+        return node.nodeName().equals("ac:structured-macro") && Arrays.asList(attrValues).contains(node.attr("ac:name"));
+    }
+
+    public static String cleanAttribute(String attribute) {
+        return attribute.replaceAll("(\n+\\s*)+", "\n");
+    }
+
     public boolean isCode() {
         // TODO cache in property to avoid escalating to root
         return this.node.nodeName().equals("code") || (parent != null && parent.isCode());
@@ -154,44 +167,17 @@ public class CopyNode {
         if (sibling == null) {
             return false;
         }
-        if (NodeUtils.isNodeTypeText(sibling)) {
+        if (JsoupUtils.isNodeTypeText(sibling)) {
             // TODO fix. Originally sibling.nodeValue
             return Pattern.compile(regex).matcher(sibling.outerHtml()).find();
         }
-        if (NodeUtils.isNodeTypeElement(sibling)) {
+        if (JsoupUtils.isNodeTypeElement(sibling)) {
             // TODO fix. Originally textContent
             return Pattern.compile(regex).matcher(sibling.outerHtml()).find();
         }
         return false;
     }
 
-    private boolean hasBlockNodesSet(Node node) {
-        if (!(node instanceof Element el)) {
-            return false;
-        }
-        for (String tagName : BLOCK_ELEMENTS_SET) {
-            if (!el.getElementsByTag(tagName).isEmpty()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static class FlankingWhiteSpaces {
-        private final String leading;
-        private final String trailing;
-
-        FlankingWhiteSpaces(String leading, String trailing) {
-            this.leading = leading;
-            this.trailing = trailing;
-        }
-
-        String getLeading() {
-            return leading;
-        }
-
-        String getTrailing() {
-            return trailing;
-        }
+    public record FlankingWhiteSpaces(String leading, String trailing) {
     }
 }
