@@ -9,14 +9,14 @@ class HelloWorld {
     }
 }
 ```
-**Title: Hello2**
+??? code "Title: Hello2"
 
-```java
-// Your First Program
-
-class HelloWorld {
-    public static void main(String[] args) {
-        System.out.println("Hello, World!");
+    ```java
+    // Your First Program
+    
+    class HelloWorld {
+        public static void main(String[] args) {
+            System.out.println("Hello, World!");
+        }
     }
-}
-```
+    ```

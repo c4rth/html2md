@@ -17,7 +17,7 @@ public class CodeRule extends Rule {
                     if (content.trim().isEmpty()) {
                         return "";
                     }
-                    String delimiter = "`";
+                    String delimiter = options.preformatted;
                     String leadingSpace = "";
                     String trailingSpace = "";
                     Pattern pattern = Pattern.compile("(?m)(`)+");

@@ -28,11 +28,11 @@ public class Rules {
         addRule("horizontalRule", new HorizontalRule());
         addRule("inlineLink", new InlineLinkRule());
         addRule("referenceLink", new ReferenceLinkRule(references));
-        addRule("emphasis", new EmphasisRule());
-        addRule("strong", new StrongRule());
+        addRule("textFormatting", new TextFormattingRule());
         addRule("code", new CodeRule());
         addRule("img", new ImageRule());
         addRule("table", new TableRule());
+        addRule("span", new SpanRule());
         // ac:
         addRule("acRichTextBody", new AcTextBodyRule());
         addRule("acEmoticon", new AcEmoticonRule());
@@ -49,6 +49,7 @@ public class Rules {
         addRule("acDefault", new AcDefaultRule());
         addRule("acBlank", new AcBlankRule());
         // others
+        addRule("notSupported", new NotSupportedRule());
         addRule("blankReplacement", new BlankReplacementRule());
         addRule("default", new DefaultRule());
     }

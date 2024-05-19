@@ -10,25 +10,35 @@ import org.carth.html2md.copydown.style.LinkStyle;
 public class Options {
 
     @Builder.Default
-    public  String br = "  ";
+    public String br = "  ";
     @Builder.Default
-    public  String hr = "* * *";
+    public String hr = "* * *";
     @Builder.Default
-    public  String emDelimiter = "_";
+    public String emDelimiter = "_";
     @Builder.Default
-    public  String strongDelimiter = "**";
+    public String strongDelimiter = "**";
     @Builder.Default
-    public  HeadingStyle headingStyle = HeadingStyle.SETEXT;
+    public String underlineDelimiter = "^^";
     @Builder.Default
-    public  String bulletListMaker = "-";
+    public String superscriptDelimiter = "^";
     @Builder.Default
-    public  CodeBlockStyle codeBlockStyle = CodeBlockStyle.INDENTED;
+    public String subscriptDelimiter = "~";
     @Builder.Default
-    public  LinkStyle linkStyle = LinkStyle.INLINED;
+    public String strikethroughDelimiter = "~~";
     @Builder.Default
-    public  LinkReferenceStyle linkReferenceStyle = LinkReferenceStyle.DEFAULT;
+    public HeadingStyle headingStyle = HeadingStyle.ATX;
     @Builder.Default
-    public  String fence = "```";
+    public String bulletListMaker = "-";
+    @Builder.Default
+    public CodeBlockStyle codeBlockStyle = CodeBlockStyle.INDENTED;
+    @Builder.Default
+    public LinkStyle linkStyle = LinkStyle.INLINED;
+    @Builder.Default
+    public LinkReferenceStyle linkReferenceStyle = LinkReferenceStyle.DEFAULT;
+    @Builder.Default
+    public String fence = "```";
+    @Builder.Default
+    public String preformatted = "`";
     @Builder.Default
     public String admonition = "!!!";
     @Builder.Default
