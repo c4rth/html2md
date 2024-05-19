@@ -5,7 +5,7 @@ public class AcEmoticonRule extends Rule {
     public AcEmoticonRule() {
         setRule(
                 "ac:emoticon",
-                (content, node, options) -> node.nodeName() + EmojiMap.getEmoji(node.attr("ac:emoji-id")) + " "
+                (content, node, options) -> EmojiMap.getEmoji(node.attr("ac:emoji-id")) + " "
         );
     }
 }

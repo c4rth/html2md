@@ -3,13 +3,14 @@ package org.carth.html2md.copydown.rules;
 import org.carth.html2md.copydown.style.HeadingStyle;
 
 import java.util.Collections;
+import java.util.List;
 
 public class HeadingRule extends Rule {
 
 
     public HeadingRule() {
         setRule(
-                new String[]{"h1", "h2", "h3", "h4", "h5", "h6"},
+                List.of("h1", "h2", "h3", "h4", "h5", "h6"),
                 (content, node, options) ->
                 {
                     int hLevel = Integer.parseInt(node.nodeName().substring(1, 2));

@@ -8,6 +8,7 @@ import org.jsoup.nodes.Node;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
@@ -21,19 +22,9 @@ abstract public class Rule {
     @Setter
     private String name;
 
-    public void setRule(
-            String filter,
-            TriSupplier<String, Node, Options, String> replace
-    ) {
-        this.filter = (el, options) -> el.nodeName().toLowerCase().equals(filter);
-        this.replace = replace;
-    }
-
     public void setRule(BiPredicate<Node, Options> filter, TriSupplier<String, Node, Options, String> replace) {
-        this.filter = filter;
-        this.replace = replace;
+        setRule(filter, replace, null);
     }
-
 
     public void setRule(BiPredicate<Node, Options> filter, TriSupplier<String, Node, Options, String> replace, Function<Options, String> append) {
         this.filter = filter;
@@ -41,12 +32,13 @@ abstract public class Rule {
         this.append = append;
     }
 
-    public void setRule(
-            String[] filters,
-            TriSupplier<String, Node, Options, String> replace
-    ) {
-        Set<String> availableFilters = new HashSet<>(Arrays.asList(filters));
-        this.filter = (el, options) -> availableFilters.contains(el.nodeName());
+    public void setRule(String filter, TriSupplier<String, Node, Options, String> replace) {
+        this.filter = (el, options) -> el.nodeName().toLowerCase().equals(filter);
+        this.replace = replace;
+    }
+
+    public void setRule(List<String> filters, TriSupplier<String, Node, Options, String> replace) {
+        this.filter = (el, options) -> filters.contains(el.nodeName());
         this.replace = replace;
     }
 

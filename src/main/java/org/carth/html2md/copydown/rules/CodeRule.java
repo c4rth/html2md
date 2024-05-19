@@ -7,11 +7,11 @@ import java.util.regex.Pattern;
 public class CodeRule extends Rule {
     public CodeRule() {
         setRule(
-                (element, options) -> {
-                    boolean hasSiblings = element.previousSibling() != null || element.nextSibling() != null;
-                    assert element.parentNode() != null;
-                    boolean isCodeBlock = element.parentNode().nodeName().equals("pre") && !hasSiblings;
-                    return element.nodeName().equals("code") && !isCodeBlock;
+                (node, options) -> {
+                    boolean hasSiblings = node.previousSibling() != null || node.nextSibling() != null;
+                    assert node.parentNode() != null;
+                    boolean isCodeBlock = node.parentNode().nodeName().equals("pre") && !hasSiblings;
+                    return node.nodeName().equals("code") && !isCodeBlock;
                 },
                 (content, node, options) -> {
                     if (content.trim().isEmpty()) {

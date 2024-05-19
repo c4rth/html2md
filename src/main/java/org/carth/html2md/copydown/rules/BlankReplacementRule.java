@@ -6,7 +6,7 @@ public class BlankReplacementRule extends Rule {
 
     public BlankReplacementRule() {
         setRule(
-                (element, options) -> CopyNode.isBlank(element),
+                (node, options) -> CopyNode.isBlank(node),
                 (content, node, options) -> CopyNode.isBlock(node) ? "\n\n" : ""
         );
     }

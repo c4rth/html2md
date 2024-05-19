@@ -10,9 +10,11 @@ import java.util.List;
 @Slf4j
 public class Rules {
     public final List<Rule> rules;
+    public final List<String> references;
 
-    public Rules(List<String> references) {
+    public Rules() {
         this.rules = new ArrayList<>();
+        this.references = new ArrayList<>();
 
         // html
         addRule("paragraph", new ParagraphRule());
@@ -41,7 +43,7 @@ public class Rules {
         addRule("acStructuredMacroStatus", new AcStructuredMacroStatusRule());
         addRule("acStructuredMacroCode", new AcStructuredMacroCodeRule());
         addRule("acStructuredMacroGliffy", new AcStructuredMacroGliffyRule());
-        addRule("acTask", new AcTaskRule());
+        addRule("acTaskList", new AcTaskListRule());
         addRule("acParameter", new AcParameterRule());
         addRule("acStructuredMacro", new AcStructuredMacroRule());
         addRule("acDefault", new AcDefaultRule());

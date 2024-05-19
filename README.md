@@ -3,5 +3,4 @@
 - conversion for "ac" tags
 
 # Credits
-
-https://github.com/furstenheim/copy-down
+Largely based on this library: https://github.com/furstenheim/copy-down

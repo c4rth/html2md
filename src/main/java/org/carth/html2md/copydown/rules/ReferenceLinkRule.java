@@ -14,10 +14,10 @@ public class ReferenceLinkRule extends Rule {
 
     public ReferenceLinkRule(List<String> references) {
         setRule(
-                (element, options) ->
+                (node, options) ->
                         options.linkStyle == LinkStyle.REFERENCED
-                                && element.nodeName().equals("a")
-                                && !element.attr("href").isEmpty(),
+                                && node.nodeName().equals("a")
+                                && !node.attr("href").isEmpty(),
                 this::replace,
                 this::append
         );

@@ -32,7 +32,6 @@ public class CopyDown {
             new Escape("^(\\d+)\\. ", "$1\\\\. ")
     );
     private Rules rules;
-    private List<String> references;
 
     public CopyDown() {
         this.options = Options.builder().build();
@@ -45,15 +44,13 @@ public class CopyDown {
     }
 
     public String convert(String content) {
-        references = new ArrayList<>();
         CopyNode copyRootNode = new CopyNode(content);
         String result = process(copyRootNode);
         return postProcess(result);
     }
 
     private void setUp() {
-        references = new ArrayList<>();
-        rules = new Rules(references);
+        rules = new Rules();
     }
 
     private String postProcess(String output) {
@@ -88,7 +85,7 @@ public class CopyDown {
         if (!flankingWhiteSpaces.getLeading().isEmpty() || !flankingWhiteSpaces.getTrailing().isEmpty()) {
             content = content.trim();
         }
-        content = flankingWhiteSpaces.getLeading() + rule.getReplace().supply(content, node.node, options) + flankingWhiteSpaces.getTrailing();
+        content = flankingWhiteSpaces.getLeading() + rule.getReplace().apply(content, node.node, options) + flankingWhiteSpaces.getTrailing();
         return content;
     }
 

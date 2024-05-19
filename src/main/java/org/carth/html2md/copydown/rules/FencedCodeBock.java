@@ -13,10 +13,10 @@ public class FencedCodeBock extends Rule {
 
     public FencedCodeBock() {
         setRule(
-                (element, options) -> options.codeBlockStyle == CodeBlockStyle.FENCED
-                        && element.nodeName().equals("pre")
-                        && element.childNodeSize() > 0
-                        && element.childNode(0).nodeName().equals("code"),
+                (node, options) -> options.codeBlockStyle == CodeBlockStyle.FENCED
+                        && node.nodeName().equals("pre")
+                        && node.childNodeSize() > 0
+                        && node.childNode(0).nodeName().equals("code"),
                 this::replace
         );
     }

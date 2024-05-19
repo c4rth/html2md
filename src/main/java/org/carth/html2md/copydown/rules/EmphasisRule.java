@@ -1,16 +1,13 @@
 package org.carth.html2md.copydown.rules;
 
+import java.util.List;
+
 public class EmphasisRule extends Rule {
 
     public EmphasisRule() {
         setRule(
-                new String[]{"em", "i"},
-                (content, node, options) -> {
-                    if (content.trim().isEmpty()) {
-                        return "";
-                    }
-                    return options.emDelimiter + content + options.emDelimiter;
-                }
+                List.of("em", "i"),
+                (content, node, options) -> content.trim().isEmpty() ? "" : options.emDelimiter + content + options.emDelimiter
         );
     }
 }

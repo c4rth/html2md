@@ -2,11 +2,13 @@ package org.carth.html2md.copydown.rules;
 
 import org.jsoup.nodes.Element;
 
+import java.util.List;
+
 public class ListRule extends Rule {
 
     public ListRule() {
         setRule(
-                new String[]{"ul", "ol"},
+                List.of("ul", "ol"),
                 (content, node, options) -> {
                     Element parent = (Element) node.parentNode();
                     assert parent != null;

@@ -17,7 +17,7 @@ public class CopyNode {
     };
     private static final String[] MEANINGFUL_WHEN_BLANK_ELEMENTS = {
             "a", "table", "thead", "tbody", "tfoot", "th", "td", "iframe", "script",
-            "audio", "video", "ac:task-list", "ac:task", "ac:task-body"
+            "audio", "video"
     };
 
     private static final String[] BLOCK_ELEMENTS = {
@@ -26,22 +26,21 @@ public class CopyNode {
             "footer", "form", "frameset", "h1", "h2", "h3", "h4", "h5", "h6", "header",
             "hgroup", "hr", "html", "isindex", "li", "main", "menu", "nav", "noframes",
             "noscript", "ol", "output", "p", "pre", "section", "table", "tbody", "td",
-            "tfoot", "th", "thead", "tr", "ul", "ac:task-list", "ac:task", "ac:task-body"
+            "tfoot", "th", "thead", "tr", "colgroup", "col", "ul"
     };
 
-    private static Set<String> VOID_ELEMENTS_SET = null;
-    private static Set<String> MEANINGFUL_WHEN_BLANK_ELEMENTS_SET = null;
-    private static Set<String> BLOCK_ELEMENTS_SET = null;
+    private static final Set<String> VOID_ELEMENTS_SET = new HashSet<>(Arrays.asList(VOID_ELEMENTS));
+    private static final Set<String> MEANINGFUL_WHEN_BLANK_ELEMENTS_SET = new HashSet<>(Arrays.asList(MEANINGFUL_WHEN_BLANK_ELEMENTS));
+    private static final Set<String> BLOCK_ELEMENTS_SET = new HashSet<>(Arrays.asList(BLOCK_ELEMENTS));
 
     final Node node;
     CopyNode parent;
 
     CopyNode(String input) {
-        Document document = Jsoup.parse(
-                // DOM parsers arrange elements in the <head> and <body>.
-                // Wrapping in a custom element ensures elements are reliably arranged in
-                // a single element.
-                "<x-copydown id=\"copydown-root\">" + input + "</x-copydown>");
+        // DOM parsers arrange elements in the <head> and <body>.
+        // Wrapping in a custom element ensures elements are reliably arranged in
+        // a single element.
+        Document document = Jsoup.parse("<x-copydown id=\"copydown-root\">" + input + "</x-copydown>");
         Element root = document.getElementById("copydown-root");
         assert root != null;
         new WhitespaceCollapser().collapse(root);
@@ -82,15 +81,7 @@ public class CopyNode {
     }
 
     public static boolean isVoid(Node node) {
-        return getVoidNodesSet().contains(node.nodeName());
-    }
-
-    private static Set<String> getVoidNodesSet() {
-        if (VOID_ELEMENTS_SET != null) {
-            return VOID_ELEMENTS_SET;
-        }
-        VOID_ELEMENTS_SET = new HashSet<>(Arrays.asList(VOID_ELEMENTS));
-        return VOID_ELEMENTS_SET;
+        return VOID_ELEMENTS_SET.contains(node.nodeName());
     }
 
     private static boolean hasMeaningfulWhenBlankNodesSet(Node node) {
@@ -106,27 +97,15 @@ public class CopyNode {
     }
 
     private static boolean isMeaningfulWhenBlank(Node node) {
-        return getMeaningfulWhenBlankNodesSet().contains(node.nodeName());
-    }
-
-    private static Set<String> getMeaningfulWhenBlankNodesSet() {
-        if (MEANINGFUL_WHEN_BLANK_ELEMENTS_SET != null) {
-            return MEANINGFUL_WHEN_BLANK_ELEMENTS_SET;
-        }
-        MEANINGFUL_WHEN_BLANK_ELEMENTS_SET = new HashSet<>(Arrays.asList(MEANINGFUL_WHEN_BLANK_ELEMENTS));
-        return MEANINGFUL_WHEN_BLANK_ELEMENTS_SET;
+        return MEANINGFUL_WHEN_BLANK_ELEMENTS_SET.contains(node.nodeName());
     }
 
     public static boolean isBlock(Node node) {
-        return getBlockNodesSet().contains(node.nodeName());
+        return BLOCK_ELEMENTS_SET.contains(node.nodeName()) || isAcBlock(node);
     }
 
-    private static Set<String> getBlockNodesSet() {
-        if (BLOCK_ELEMENTS_SET != null) {
-            return BLOCK_ELEMENTS_SET;
-        }
-        BLOCK_ELEMENTS_SET = new HashSet<>(Arrays.asList(BLOCK_ELEMENTS));
-        return BLOCK_ELEMENTS_SET;
+    public static boolean isAcBlock(Node node) {
+        return node.nodeName().startsWith("ac:") || node.nodeName().startsWith("ri:");
     }
 
     public boolean isCode() {

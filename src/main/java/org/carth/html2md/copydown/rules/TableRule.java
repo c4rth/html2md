@@ -6,6 +6,7 @@ import org.carth.html2md.report.ConversionReport;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -14,7 +15,7 @@ public class TableRule extends Rule {
 
     public TableRule() {
         setRule(
-                new String[]{"table", "th", "td", "tr", "thead", "tbody", "tfoot"},
+                List.of("table", "th", "td", "tr", "thead", "tbody", "tfoot", "colgroup", "col"),
                 this::replace
         );
     }
@@ -24,6 +25,7 @@ public class TableRule extends Rule {
             case "table" -> table(content, node);
             case "th", "td" -> cell(content, node, false);
             case "tr" -> row(content, node);
+            case "colgroup", "col" -> "";
             default -> content;
         };
     }
@@ -54,7 +56,7 @@ public class TableRule extends Rule {
         result = new StringBuilder(prefix + content + " |");
         try {
             int colspan = Integer.parseInt(node.attr("colspan")) - 1;
-            String colspanContent = borderCell ? " " + content + " |" : " |";
+            String colspanContent = borderCell ? " " + content + " " : " |";
             result.append(colspanContent.repeat(Math.max(0, colspan)));
         } catch (NumberFormatException e) {
             // empty
@@ -66,9 +68,10 @@ public class TableRule extends Rule {
         var parentNode = tableRow.parentNode();
         assert parentNode != null;
         return (
-                parentNode.nodeName().equalsIgnoreCase("THEAD") ||
+                parentNode.nodeName().equalsIgnoreCase("thead") ||
                         (
-                                parentNode.firstChild() == tableRow && (parentNode.nodeName().equalsIgnoreCase("TABLE") || isFirstTbody(parentNode))
+                                parentNode.firstChild() == tableRow &&
+                                        (parentNode.nodeName().equalsIgnoreCase("table") || isFirstTbody(parentNode))
                         )
         );
     }
@@ -78,10 +81,10 @@ public class TableRule extends Rule {
         while (previousSibling instanceof TextNode) {
             previousSibling = previousSibling.previousSibling();
         }
-        return (node.nodeName().equalsIgnoreCase("TBODY") &&
+        return (node.nodeName().equalsIgnoreCase("tbody") &&
                 (previousSibling == null ||
-                        (previousSibling.nodeName().equalsIgnoreCase("THEAD") && Pattern.compile("(?i)^\\s*$").matcher(node.outerHtml()).find()) ||
-                        (previousSibling.nodeName().equalsIgnoreCase("COLGROUP"))
+                        (previousSibling.nodeName().equalsIgnoreCase("thead") && Pattern.compile("(?i)^\\s*$").matcher(node.outerHtml()).find()) ||
+                        (previousSibling.nodeName().equalsIgnoreCase("colgroup"))
                 )
         );
     }

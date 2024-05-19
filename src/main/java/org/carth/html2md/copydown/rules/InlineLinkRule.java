@@ -7,10 +7,10 @@ public class InlineLinkRule extends Rule {
 
     public InlineLinkRule() {
         setRule(
-                (element, options) ->
+                (node, options) ->
                         options.linkStyle == LinkStyle.INLINED
-                                && element.nodeName().equals("a")
-                                && !element.attr("href").isEmpty(),
+                                && node.nodeName().equals("a")
+                                && !node.attr("href").isEmpty(),
                 (content, node, options) -> {
                     String href = node.attr("href");
                     String title = MarkdownUtils.cleanAttribute(node.attr("title"));

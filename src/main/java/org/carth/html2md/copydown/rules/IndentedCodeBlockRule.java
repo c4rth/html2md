@@ -7,11 +7,11 @@ public class IndentedCodeBlockRule extends Rule {
 
     public IndentedCodeBlockRule() {
         setRule(
-                (element, options) ->
+                (node, options) ->
                         options.codeBlockStyle == CodeBlockStyle.INDENTED
-                                && element.nodeName().equals("pre")
-                                && element.childNodeSize() > 0
-                                && element.childNode(0).nodeName().equals("code"),
+                                && node.nodeName().equals("pre")
+                                && node.childNodeSize() > 0
+                                && node.childNode(0).nodeName().equals("code"),
                 // TODO check textContent
                 (content, node, options) -> "\n\n    " + ((Element) node.childNode(0)).wholeText().replaceAll("\n", "\n    ")
 

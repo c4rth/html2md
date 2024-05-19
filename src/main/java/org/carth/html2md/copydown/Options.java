@@ -20,7 +20,7 @@ public class Options {
     @Builder.Default
     public  HeadingStyle headingStyle = HeadingStyle.SETEXT;
     @Builder.Default
-    public  String bulletListMaker = "*";
+    public  String bulletListMaker = "-";
     @Builder.Default
     public  CodeBlockStyle codeBlockStyle = CodeBlockStyle.INDENTED;
     @Builder.Default

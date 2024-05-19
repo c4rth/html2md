@@ -1,5 +1,6 @@
 package org.carth.html2md.copydown.rules;
 
+import org.carth.html2md.utils.AcNodeUtils;
 import org.jsoup.nodes.Element;
 
 import java.util.Optional;
@@ -7,7 +8,7 @@ import java.util.Optional;
 public class AcStructuredMacroStatusRule extends Rule {
     public AcStructuredMacroStatusRule() {
         setRule(
-                (element, options) -> element.nodeName().equals("ac:structured-macro") && element.attr("ac:name").equals("status"),
+                (node, options) -> AcNodeUtils.isAcMacroWithName(node, "status"),
                 (content, node, options) -> {
                     Element element = (Element) node;
                     Optional<Element> color = element.select("ac|parameter").stream().filter(el -> el.hasAttr("ac:name") && el.attr("ac:name").equals("colour")).findFirst();
