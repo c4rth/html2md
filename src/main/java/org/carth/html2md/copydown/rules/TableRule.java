@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 public class TableRule extends Rule {
 
     public TableRule() {
-        setRule(
+        init(
                 List.of("table", "th", "td", "tr", "thead", "tbody", "tfoot", "colgroup", "col"),
                 this::replace
         );
@@ -67,12 +67,10 @@ public class TableRule extends Rule {
     private boolean isHeadingRow(Node tableRow) {
         var parentNode = tableRow.parentNode();
         assert parentNode != null;
-        return (
-                parentNode.nodeName().equalsIgnoreCase("thead") ||
-                        (
-                                parentNode.firstChild() == tableRow &&
-                                        (parentNode.nodeName().equalsIgnoreCase("table") || isFirstTbody(parentNode))
-                        )
+        return (parentNode.nodeName().equalsIgnoreCase("thead") ||
+                (parentNode.firstChild() == tableRow &&
+                        (parentNode.nodeName().equalsIgnoreCase("table") || isFirstTbody(parentNode))
+                )
         );
     }
 

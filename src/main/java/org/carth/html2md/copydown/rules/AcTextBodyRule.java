@@ -5,7 +5,7 @@ import java.util.List;
 public class AcTextBodyRule extends Rule {
 
     public AcTextBodyRule() {
-        setRule(
+        init(
                 List.of("ac:rich-text-body"),
                 (content, node, options) -> content
         );

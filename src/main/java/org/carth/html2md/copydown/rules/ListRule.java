@@ -7,7 +7,7 @@ import java.util.List;
 public class ListRule extends Rule {
 
     public ListRule() {
-        setRule(
+        init(
                 List.of("ul", "ol"),
                 (content, node, options) -> {
                     Element parent = (Element) node.parentNode();

@@ -5,7 +5,7 @@ import org.carth.html2md.copydown.CopyNode;
 public class BlankReplacementRule extends Rule {
 
     public BlankReplacementRule() {
-        setRule(
+        init(
                 (node, options) -> CopyNode.isBlank(node),
                 (content, node, options) -> CopyNode.isBlock(node) ? "\n\n" : ""
         );

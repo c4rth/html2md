@@ -52,15 +52,6 @@ public class CopyDown {
         rules = new Rules();
     }
 
-    private String postProcess(String output) {
-        for (Rule rule : rules.rules) {
-            if (rule.getAppend() != null) {
-                output = join(output, rule.getAppend().apply(options));
-            }
-        }
-        return output.replaceAll("^[\\t\\n\\r]+", "").replaceAll("[\\t\\r\\n\\s]+$", "");
-    }
-
     private String process(CopyNode node) {
         String result = "";
         for (Node child : node.node.childNodes()) {
@@ -98,6 +89,15 @@ public class CopyDown {
         return trailingMatcher.replaceAll("")
                 + newLineJoin
                 + leadingMatcher.replaceAll("");
+    }
+
+    private String postProcess(String output) {
+        for (Rule rule : rules.rules) {
+            if (rule.getAppend() != null) {
+                output = join(output, rule.getAppend().apply(options));
+            }
+        }
+        return output.replaceAll("^[\\t\\n\\r]+", "").replaceAll("[\\t\\r\\n\\s]+$", "");
     }
 
     private String escape(String string) {

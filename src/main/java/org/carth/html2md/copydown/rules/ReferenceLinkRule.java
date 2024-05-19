@@ -13,7 +13,7 @@ public class ReferenceLinkRule extends Rule {
     private final List<String> references;
 
     public ReferenceLinkRule(List<String> references) {
-        setRule(
+        init(
                 (node, options) ->
                         options.linkStyle == LinkStyle.REFERENCED
                                 && node.nodeName().equals("a")

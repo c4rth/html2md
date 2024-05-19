@@ -7,7 +7,7 @@ import java.util.List;
 public class AcTaskListRule extends Rule {
 
     public AcTaskListRule() {
-        setRule(
+        init(
                 List.of("ac:task-list", "ac:task", "ac:task-body"),
                 (content, node, options) -> {
                     if (node.nodeName().equals("ac:task")) {

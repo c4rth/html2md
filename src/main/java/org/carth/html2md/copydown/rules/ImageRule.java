@@ -5,7 +5,7 @@ import org.carth.html2md.copydown.CopyNode;
 public class ImageRule extends Rule {
 
     public ImageRule() {
-        setRule(
+        init(
                 "img",
                 (content, node, options) -> {
                     String alt = CopyNode.cleanAttribute(node.attr("alt"));

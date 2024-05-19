@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public class AcStructuredMacroGliffyRule extends Rule {
     public AcStructuredMacroGliffyRule() {
-        setRule(
+        init(
                 (node, options) -> CopyNode.isAcMacroWithName(node, "gliffy"),
                 (content, node, options) -> {
                     Element element = (Element) node;

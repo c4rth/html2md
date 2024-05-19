@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 public class ListItemRule extends Rule {
 
     public ListItemRule() {
-        setRule(
+        init(
                 "li",
                 (content, node, options) -> {
                     content = content.replaceAll("^\n+", "") // remove leading new lines

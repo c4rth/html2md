@@ -9,7 +9,7 @@ import static org.carth.html2md.copydown.CopyNode.cleanAttribute;
 public class AcImageRule extends Rule {
 
     public AcImageRule() {
-        setRule(
+        init(
                 "ac:image",
                 this::replace
         );

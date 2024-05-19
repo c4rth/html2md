@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class CodeRule extends Rule {
     public CodeRule() {
-        setRule(
+        init(
                 (node, options) -> {
                     boolean hasSiblings = node.previousSibling() != null || node.nextSibling() != null;
                     assert node.parentNode() != null;

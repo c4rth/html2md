@@ -6,7 +6,7 @@ import org.carth.html2md.copydown.style.LinkStyle;
 public class InlineLinkRule extends Rule {
 
     public InlineLinkRule() {
-        setRule(
+        init(
                 (node, options) ->
                         options.linkStyle == LinkStyle.INLINED
                                 && node.nodeName().equals("a")

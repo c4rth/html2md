@@ -5,7 +5,7 @@ import org.jsoup.nodes.Element;
 public class AcLinkRule extends Rule {
 
     public AcLinkRule() {
-        setRule(
+        init(
                 "ac:link",
                 (content, node, options) -> {
                     Element element = (Element) node;

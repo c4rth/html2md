@@ -5,7 +5,7 @@ import java.util.List;
 public class StrongRule extends Rule {
 
     public StrongRule() {
-        setRule(
+        init(
                 List.of("strong", "b"),
                 (content, node, options) -> {
                     if (content.trim().isEmpty()) {

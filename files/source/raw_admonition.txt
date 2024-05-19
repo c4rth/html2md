@@ -1,0 +1,2 @@
+<ac:structured-macro ac:name="info" ac:schema-version="1" ac:macro-id="9aa2f2bd-8bed-4e8b-8496-fe62a5aef7d3"><ac:parameter ac:name="title">Information title</ac:parameter><ac:rich-text-body><p>Information content<br />An other line</p><p>an other paragraph</p></ac:rich-text-body></ac:structured-macro>
+<ac:structured-macro ac:name="warning" ac:schema-version="1" ac:macro-id="dd546578-ae02-4c15-ba68-4442b72b60ae"><ac:parameter ac:name="title">Warning</ac:parameter><ac:rich-text-body><p>Warning content</p></ac:rich-text-body></ac:structured-macro>

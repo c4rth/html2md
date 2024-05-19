@@ -6,7 +6,7 @@ import org.jsoup.nodes.Element;
 public class IndentedCodeBlockRule extends Rule {
 
     public IndentedCodeBlockRule() {
-        setRule(
+        init(
                 (node, options) ->
                         options.codeBlockStyle == CodeBlockStyle.INDENTED
                                 && node.nodeName().equals("pre")

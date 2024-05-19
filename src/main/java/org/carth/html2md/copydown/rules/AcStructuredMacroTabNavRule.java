@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public class AcStructuredMacroTabNavRule extends Rule {
     public AcStructuredMacroTabNavRule() {
-        setRule(
+        init(
                 (node, options) -> CopyNode.isAcMacroWithName(node, "tab-pane", "horizontal-nav-item"),
                 (content, node, options) -> {
                     Optional<Element> title = CopyNode.getAcParametertWithName((Element) node, "name");

@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public class AcStructuredMacroStatusRule extends Rule {
     public AcStructuredMacroStatusRule() {
-        setRule(
+        init(
                 (node, options) -> CopyNode.isAcMacroWithName(node, "status"),
                 (content, node, options) -> {
                     Element element = (Element) node;
@@ -15,7 +15,8 @@ public class AcStructuredMacroStatusRule extends Rule {
                     Optional<Element> title = element.select("ac|parameter").stream().filter(el -> el.hasAttr("ac:name") && el.attr("ac:name").equals("title")).findFirst();
                     String colorPart = color.map(Element::wholeText).orElse("");
                     String titlePart = title.map(Element::wholeText).orElse("");
-                    return colorPart.isEmpty() ? titlePart :
+                    return colorPart.isEmpty() ?
+                            titlePart :
                             "<span style=\"background-color:" + colorPart + "; color: white\">" + titlePart + "</span>";
                 }
         );

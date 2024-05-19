@@ -9,7 +9,7 @@ public class HeadingRule extends Rule {
 
 
     public HeadingRule() {
-        setRule(
+        init(
                 List.of("h1", "h2", "h3", "h4", "h5", "h6"),
                 (content, node, options) ->
                 {

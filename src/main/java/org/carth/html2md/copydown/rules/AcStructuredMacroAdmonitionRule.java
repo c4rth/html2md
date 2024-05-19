@@ -7,12 +7,15 @@ import java.util.Optional;
 
 public class AcStructuredMacroAdmonitionRule extends Rule {
     public AcStructuredMacroAdmonitionRule() {
-        setRule(
-                (node, options) -> CopyNode.isAcMacroWithName(node, "info", "warning"),
+        init(
+                (node, options) -> CopyNode.isAcMacroWithName(node, "info", "warning", "note", "tip"),
                 (content, node, options) -> {
                     Optional<Element> title = CopyNode.getAcParametertWithName((Element) node, "title");
+                    Optional<Element> collapse = CopyNode.getAcParametertWithName((Element) node, "collapse");
                     String titlePart = title.map(Element::wholeText).orElse("");
-                    return "\n!!! " + node.attr("ac:name") + " \"" + titlePart + "\"" + content.replaceAll("\n", "\n    ");
+                    boolean collapsed = collapse.map(Element::wholeText).orElse("false").equals("true");
+                    return "\n" + (collapsed ? options.collapsedAdmonition : options.admonition) + " " + node.attr("ac:name") + " \""
+                            + titlePart + "\"" + content.replaceAll("\n", "\n    ");
                 }
         );
     }

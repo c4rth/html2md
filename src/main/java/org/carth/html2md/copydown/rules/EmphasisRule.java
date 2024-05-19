@@ -5,7 +5,7 @@ import java.util.List;
 public class EmphasisRule extends Rule {
 
     public EmphasisRule() {
-        setRule(
+        init(
                 List.of("em", "i"),
                 (content, node, options) -> content.trim().isEmpty() ? "" : options.emDelimiter + content + options.emDelimiter
         );

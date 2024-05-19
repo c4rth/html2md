@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 public class FencedCodeBock extends Rule {
 
     public FencedCodeBock() {
-        setRule(
+        init(
                 (node, options) -> options.codeBlockStyle == CodeBlockStyle.FENCED
                         && node.nodeName().equals("pre")
                         && node.childNodeSize() > 0

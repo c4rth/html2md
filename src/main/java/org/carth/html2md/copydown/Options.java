@@ -29,19 +29,8 @@ public class Options {
     public  LinkReferenceStyle linkReferenceStyle = LinkReferenceStyle.DEFAULT;
     @Builder.Default
     public  String fence = "```";
-
-    public Options(String br, String hr, String emDelimiter, String strongDelimiter,
-                   HeadingStyle headingStyle, String bulletListMaker, CodeBlockStyle codeBlockStyle,
-                   LinkStyle linkStyle, LinkReferenceStyle linkReferenceStyle, String fence) {
-        this.br = br;
-        this.hr = hr;
-        this.emDelimiter = emDelimiter;
-        this.strongDelimiter = strongDelimiter;
-        this.headingStyle = headingStyle;
-        this.bulletListMaker = bulletListMaker;
-        this.codeBlockStyle = codeBlockStyle;
-        this.linkStyle = linkStyle;
-        this.linkReferenceStyle = linkReferenceStyle;
-        this.fence = fence;
-    }
+    @Builder.Default
+    public String admonition = "!!!";
+    @Builder.Default
+    public String collapsedAdmonition = "???";
 }

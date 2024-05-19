@@ -28,6 +28,7 @@ public class ConvertCommand implements Callable<Integer> {
 
     @Override
     public Integer call() {
+        long start = System.nanoTime();
         setLogLevel(debug);
         String filename = page + ".txt";
         log.info("Converting '{}' to markdown.",filename);
@@ -40,7 +41,9 @@ public class ConvertCommand implements Callable<Integer> {
         String outputFilename = FileUtils.writeFile("./files/result/" + filename, markdown);
         log.info("Converted markdown: {}", outputFilename);
         ConversionReport.getInstance().report();
-        log.info("Done");
+        long end = System.nanoTime();
+        long duration = (end - start) / 1_000_000;
+        log.info("Done in {}ms", duration);
         return 0;
     }
 

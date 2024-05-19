@@ -4,7 +4,7 @@ import org.carth.html2md.report.ConversionReport;
 
 public class AcStructuredMacroRule extends Rule {
     public AcStructuredMacroRule() {
-        setRule(
+        init(
                 "ac:structured-macro",
                 (content, node, options) -> {
                     String acName =node.attr("ac:name");

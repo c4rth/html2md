@@ -3,7 +3,7 @@ package org.carth.html2md.copydown.rules;
 public class BlockquoteRule extends Rule {
 
     public BlockquoteRule() {
-        setRule(
+        init(
                 "blockquote",
                 (content, node, options) -> {
                     content = content.replaceAll("^\n+|\n+$", "");

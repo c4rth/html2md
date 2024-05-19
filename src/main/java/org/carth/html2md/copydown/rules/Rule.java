@@ -6,10 +6,7 @@ import org.carth.html2md.copydown.Options;
 import org.carth.html2md.utils.TriSupplier;
 import org.jsoup.nodes.Node;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 
@@ -22,24 +19,28 @@ abstract public class Rule {
     @Setter
     private String name;
 
-    public void setRule(BiPredicate<Node, Options> filter, TriSupplier<String, Node, Options, String> replace) {
-        setRule(filter, replace, null);
-    }
-
-    public void setRule(BiPredicate<Node, Options> filter, TriSupplier<String, Node, Options, String> replace, Function<Options, String> append) {
+    public void init(BiPredicate<Node, Options> filter, TriSupplier<String, Node, Options, String> replace, Function<Options, String> append) {
         this.filter = filter;
         this.replace = replace;
         this.append = append;
     }
 
-    public void setRule(String filter, TriSupplier<String, Node, Options, String> replace) {
-        this.filter = (el, options) -> el.nodeName().toLowerCase().equals(filter);
-        this.replace = replace;
+    public void init(BiPredicate<Node, Options> filter, TriSupplier<String, Node, Options, String> replace) {
+        init(filter, replace, null);
     }
 
-    public void setRule(List<String> filters, TriSupplier<String, Node, Options, String> replace) {
-        this.filter = (el, options) -> filters.contains(el.nodeName());
-        this.replace = replace;
+    public void init(String filter, TriSupplier<String, Node, Options, String> replace) {
+        init((el, options) -> el.nodeName().toLowerCase().equals(filter),
+                replace,
+                null
+        );
+    }
+
+    public void init(List<String> filters, TriSupplier<String, Node, Options, String> replace) {
+        init((el, options) -> filters.contains(el.nodeName()),
+                replace,
+                null
+        );
     }
 
 }
