@@ -75,7 +75,7 @@ public class CopyDown {
         if (!flankingWhiteSpaces.leading().isEmpty() || !flankingWhiteSpaces.trailing().isEmpty()) {
             content = content.trim();
         }
-        content = flankingWhiteSpaces.leading() + rule.getReplace().apply(content, node.node, options) + flankingWhiteSpaces.trailing();
+        content = flankingWhiteSpaces.leading() + rule.getReplace().get(content, node.node, options) + flankingWhiteSpaces.trailing();
         return content;
     }
 
