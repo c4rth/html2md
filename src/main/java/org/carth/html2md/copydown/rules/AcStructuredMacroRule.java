@@ -7,7 +7,7 @@ public class AcStructuredMacroRule extends Rule {
         init(
                 "ac:structured-macro",
                 (content, node, options) -> {
-                    String acName =node.attr("ac:name");
+                    String acName = node.attr("ac:name");
                     if (acName.equals("tabs-group")) {
                         ConversionReport.getInstance().addWarning("Tab group");
                     } else if (acName.contains("nav-grou")) {

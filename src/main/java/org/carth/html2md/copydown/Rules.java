@@ -33,6 +33,7 @@ public class Rules {
         addRule("img", new ImageRule());
         addRule("table", new TableRule());
         addRule("span", new SpanRule());
+        addRule("time", new TimeRule());
         // ac:
         addRule("acRichTextBody", new AcTextBodyRule());
         addRule("acEmoticon", new AcEmoticonRule());
@@ -49,9 +50,8 @@ public class Rules {
         addRule("acDefault", new AcDefaultRule());
         addRule("acBlank", new AcBlankRule());
         // others
+        //addRule("blankReplacement", new BlankReplacementRule());
         addRule("notSupported", new NotSupportedRule());
-        addRule("blankReplacement", new BlankReplacementRule());
-        addRule("default", new DefaultRule());
     }
 
     public Rule findRule(Node node, Options options) {

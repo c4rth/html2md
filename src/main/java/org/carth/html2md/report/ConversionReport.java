@@ -37,21 +37,25 @@ public class ConversionReport {
     }
 
     public void report() {
-        log.info("Conversion report:");
+        log.info("{}Conversion report:{}", AnsiColors.CYAN, AnsiColors.RESET);
         reports.forEach((key, value) -> {
             log.info("- {}:", key);
             if (value.isEmpty()) {
-                log.info("  ✅ OK");
+                log.info("{}", getMessage(AnsiColors.GREEN, Emoticon.OK, "OK"));
             } else {
                 value.forEach(report -> {
                     if (report.type() == ReportType.ERROR) {
-                        log.info(" ⛔ {}", report.description());
+                        log.info("{}", getMessage(AnsiColors.RED, Emoticon.ERROR, report.description()));
                     } else {
-                        log.info(" ⚠️ {}", report.description());
+                        log.info("{}", getMessage(AnsiColors.YELLOW, Emoticon.WARNING, report.description()));
                     }
                 });
             }
         });
+    }
+
+    private String getMessage(String color, String emoticon, String message) {
+        return " %s %s %s%s".formatted(color, emoticon, message, AnsiColors.RESET);
     }
 
 }

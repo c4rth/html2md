@@ -11,25 +11,14 @@ import java.nio.file.Paths;
 @Slf4j
 public class FileUtils {
 
-    public static String readFile(String filename) {
-        String html = null;
-        try {
-            File resource = new File(filename);
-            html = new String(Files.readAllBytes(resource.toPath()));
-        } catch (IOException ioe) {
-            log.error(ioe.getMessage(), ioe);
-        }
-        return html;
+    public static String readFile(String filename) throws IOException {
+        File resource = new File(filename);
+        return new String(Files.readAllBytes(resource.toPath()));
     }
 
-    public static String writeFile(String filename, String markdown) {
-        try {
-            Path path = Paths.get(filename + ".md");
-            Files.writeString(path, markdown);
-            return path.toAbsolutePath().toString();
-        } catch (IOException ioe) {
-            log.error(ioe.getMessage(), ioe);
-            return null;
-        }
+    public static String writeFile(String filename, String markdown) throws IOException {
+        Path path = Paths.get(filename + ".md");
+        Files.writeString(path, markdown);
+        return path.toAbsolutePath().toString();
     }
 }

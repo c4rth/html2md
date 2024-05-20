@@ -6,7 +6,7 @@ public class TextFormattingRule extends Rule {
 
     public TextFormattingRule() {
         init(
-                List.of("u", "sub", "sup","strong", "b", "em", "i", "pre", "s"),
+                List.of("u", "sub", "sup", "strong", "b", "em", "i", "pre", "s"),
                 (content, node, options) -> {
                     if (content.trim().isEmpty()) {
                         return "";

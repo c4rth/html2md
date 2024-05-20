@@ -4,9 +4,18 @@ spring:
   main:
     banner-mode: off
 
+app:
+  logging:
+    pattern:
+      normal: "%m%n"
+      #debug: "%clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(---){faint} %clr(${LOG_CORRELATION_PATTERN:-}){faint}%clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n"
+      debug: "%clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(---){faint} %clr(${LOG_CORRELATION_PATTERN:-}){faint}%clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n"
+
 logging:
   include-application-name: false
   level:
-    org.carth: debug
-  pattern:
-    console: -%clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(---){faint} %clr(${LOG_CORRELATION_PATTERN:-}){faint}%clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}
+    root: error
+    org.carth: error
+    #pattern:
+    #console: "-%clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(---){faint} %clr(${LOG_CORRELATION_PATTERN:-}){faint}%clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
+  #  console: "%m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}}"

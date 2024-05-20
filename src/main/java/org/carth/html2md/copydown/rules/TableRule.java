@@ -41,7 +41,7 @@ public class TableRule extends Rule {
         var parent = node.parent();
         while (parent != null) {
             if (parent.nodeName().equals("table")) {
-                ConversionReport.getInstance().addError("Nested table is not converted");
+                ConversionReport.getInstance().addError("Nested table is not supported");
                 return true;
             }
             parent = parent.parent();

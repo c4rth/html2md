@@ -7,7 +7,7 @@ public class NotSupportedRule extends Rule {
         init(
                 (node, options) -> true,
                 (content, node, options) -> {
-                    ConversionReport.getInstance().addWarning("tag '" + node.nodeName() + "' not supported");
+                    ConversionReport.getInstance().addWarning("Tag '" + node.nodeName() + "' not supported");
                     return content;
                 }
         );
