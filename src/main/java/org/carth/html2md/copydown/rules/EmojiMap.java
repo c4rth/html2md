@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EmojiMap {
+
+    private EmojiMap() {}
+
     private static final Map<String, String> EMOJI_MAP = new HashMap<>();
 
     static {

@@ -1,6 +1,10 @@
 package org.carth.html2md.report;
 
 public class AnsiColors {
+
+    private AnsiColors() {
+    }
+
     public static final String RESET = "\u001B[0m";
     public static final String RED = "\u001B[91m";
     public static final String GREEN = "\u001B[92m";

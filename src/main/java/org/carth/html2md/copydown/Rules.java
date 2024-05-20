@@ -9,11 +9,11 @@ import java.util.List;
 
 @Slf4j
 public class Rules {
-    public final List<Rule> rules;
+    public final List<Rule> allRules;
     public final List<String> references;
 
     public Rules() {
-        this.rules = new ArrayList<>();
+        this.allRules = new ArrayList<>();
         this.references = new ArrayList<>();
 
         // html
@@ -55,7 +55,7 @@ public class Rules {
     }
 
     public Rule findRule(Node node, Options options) {
-        for (Rule rule : rules) {
+        for (Rule rule : allRules) {
             if (rule.getFilter().test(node, options)) {
                 log.trace("tag: '{}' -> rule: '{}'", node.nodeName(), rule.getName());
                 return rule;
@@ -67,6 +67,6 @@ public class Rules {
 
     private void addRule(String name, Rule rule) {
         rule.setName(name);
-        rules.add(rule);
+        allRules.add(rule);
     }
 }

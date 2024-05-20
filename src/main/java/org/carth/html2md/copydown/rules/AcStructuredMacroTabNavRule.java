@@ -12,7 +12,7 @@ public class AcStructuredMacroTabNavRule extends Rule {
                 (content, node, options) -> {
                     Optional<Element> title = CopyNode.getAcParametertWithName((Element) node, "name");
                     String titlePart = title.map(Element::text).orElse("Tab");
-                    return "\n=== \"<span style=\"font-size: 1rem\">" + titlePart + "</span>\"" + content.replaceAll("\n", "\n    ");
+                    return "\n=== \"<span style=\"font-size: 1rem\">" + titlePart + "</span>\"" + content.replace("\n", "\n    ");
                 }
         );
     }

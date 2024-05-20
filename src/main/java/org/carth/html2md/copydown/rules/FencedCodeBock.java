@@ -33,8 +33,8 @@ public class FencedCodeBock extends Rule {
         }
 
         String code;
-        if (node.childNode(0) instanceof Element) {
-            code = ((Element) node.childNode(0)).wholeText();
+        if (node.childNode(0) instanceof Element element) {
+            code = element.wholeText();
         } else {
             code = node.childNode(0).outerHtml();
         }

@@ -13,7 +13,7 @@ public class IndentedCodeBlockRule extends Rule {
                                 && node.childNodeSize() > 0
                                 && node.childNode(0).nodeName().equals("code"),
                 // TODO check textContent
-                (content, node, options) -> "\n\n    " + ((Element) node.childNode(0)).wholeText().replaceAll("\n", "\n    ")
+                (content, node, options) -> "\n\n    " + ((Element) node.childNode(0)).wholeText().replace("\n", "\n    ")
 
         );
     }

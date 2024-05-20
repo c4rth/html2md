@@ -33,6 +33,7 @@ public class CopyNode {
     private static final Set<String> VOID_ELEMENTS_SET = new HashSet<>(Arrays.asList(VOID_ELEMENTS));
     private static final Set<String> MEANINGFUL_WHEN_BLANK_ELEMENTS_SET = new HashSet<>(Arrays.asList(MEANINGFUL_WHEN_BLANK_ELEMENTS));
     private static final Set<String> BLOCK_ELEMENTS_SET = new HashSet<>(Arrays.asList(BLOCK_ELEMENTS));
+    private static final String AC_NAME = "ac:name";
 
     final Node node;
     CopyNode parent;
@@ -55,8 +56,8 @@ public class CopyNode {
 
     public static boolean isBlank(Node node) {
         String textContent;
-        if (node instanceof Element) {
-            textContent = ((Element) node).wholeText();
+        if (node instanceof Element element ) {
+            textContent = element.wholeText();
         } else {
             textContent = node.outerHtml();
         }
@@ -110,11 +111,11 @@ public class CopyNode {
     }
 
     public static Optional<Element> getAcParametertWithName(Element element, String attributeValue) {
-        return element.select("ac|parameter").stream().filter(el -> el.hasAttr("ac:name") && el.attr("ac:name").equals(attributeValue)).findFirst();
+        return element.select("ac|parameter").stream().filter(el -> el.hasAttr(AC_NAME) && el.attr(AC_NAME).equals(attributeValue)).findFirst();
     }
 
     public static boolean isAcMacroWithName(Node node, String... attrValues) {
-        return node.nodeName().equals("ac:structured-macro") && Arrays.asList(attrValues).contains(node.attr("ac:name"));
+        return node.nodeName().equals("ac:structured-macro") && Arrays.asList(attrValues).contains(node.attr(AC_NAME));
     }
 
     public static String cleanAttribute(String attribute) {
@@ -131,8 +132,8 @@ public class CopyNode {
         String trailing = "";
         if (!isBlock(this.node)) {
             String textContent;
-            if (this.node instanceof Element) {
-                textContent = ((Element) this.node).wholeText();
+            if (this.node instanceof Element element) {
+                textContent = element.wholeText();
             } else {
                 textContent = this.node.outerHtml();
             }

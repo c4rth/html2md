@@ -92,7 +92,7 @@ public class CopyDown {
     }
 
     private String postProcess(String output) {
-        for (Rule rule : rules.rules) {
+        for (Rule rule : rules.allRules) {
             if (rule.getAppend() != null) {
                 output = join(output, rule.getAppend().apply(options));
             }

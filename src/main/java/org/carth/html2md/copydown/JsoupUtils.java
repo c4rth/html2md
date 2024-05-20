@@ -6,6 +6,8 @@ import org.jsoup.nodes.Node;
 // Methods missing from jsoup
 class JsoupUtils {
 
+    private JsoupUtils() {}
+
     static boolean isNodeTypeElement(Node node) {
         return node instanceof Element;
     }

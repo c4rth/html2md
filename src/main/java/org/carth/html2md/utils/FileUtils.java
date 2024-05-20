@@ -11,6 +11,8 @@ import java.nio.file.Paths;
 @Slf4j
 public class FileUtils {
 
+    private FileUtils() {}
+
     public static String readFile(String filename) throws IOException {
         File resource = new File(filename);
         return new String(Files.readAllBytes(resource.toPath()));

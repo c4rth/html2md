@@ -21,6 +21,8 @@ import picocli.CommandLine.Option;
 import java.io.IOException;
 import java.util.concurrent.Callable;
 
+import static org.slf4j.Logger.ROOT_LOGGER_NAME;
+
 @Component
 @Command(name = "convert", mixinStandardHelpOptions = true, sortOptions = false, versionProvider = ConvertCommand.class)
 @Slf4j
@@ -85,7 +87,7 @@ public class ConvertCommand implements Callable<Integer>, CommandLine.IVersionPr
         Logger appLogger = (Logger) LoggerFactory.getLogger("org.carth");
         appLogger.setLevel(debug ? Level.TRACE : Level.INFO);
 
-        Logger rootLogger = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+        Logger rootLogger = (Logger) LoggerFactory.getLogger(ROOT_LOGGER_NAME);
         PatternLayoutEncoder encoder = new PatternLayoutEncoder();
         encoder.setContext(rootLogger.getLoggerContext());
         encoder.setPattern(debug ? debugLogPattern : normalLogPattern);

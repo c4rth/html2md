@@ -8,10 +8,12 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 
-public class RawJsoupTests {
+import static org.assertj.core.api.Assertions.*;
+
+class RawJsoupTests {
 
     @Test
-    public void parseHtml() {
+    void parseHtml() {
         String html = """
                 <ac:structured-macro ac:name="code" ac:schema-version="1" ac:macro-id="7f4b57a0-bea4-42ec-a4c7-48e8ff49dfd7"><ac:parameter ac:name="language">java</ac:parameter><ac:parameter ac:name="title">Title: Hello1</ac:parameter><ac:plain-text-body><![CDATA[// Your First Program
                 
@@ -44,6 +46,9 @@ public class RawJsoupTests {
             String codePart = code.wholeText();
 
             System.out.println(codePart);
+
+            assertThat(codePart).isNotEmpty();
+
         }
     }
 }

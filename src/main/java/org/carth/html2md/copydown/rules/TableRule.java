@@ -13,26 +13,35 @@ import java.util.regex.Pattern;
 @Slf4j
 public class TableRule extends Rule {
 
+    private static final String TABLE = "table";
+    private static final String THEAD = "thead";
+    private static final String TBODY = "tbody";
+    private static final String TH = "th";
+    private static final String TD = "td";
+    private static final String TR = "tr";
+    private static final String COLGROUP = "colgroup";
+    private static final String COL = "col";
+
     public TableRule() {
         init(
-                List.of("table", "th", "td", "tr", "thead", "tbody", "tfoot", "colgroup", "col"),
+                List.of(TABLE, TH, TD, TR, THEAD, TBODY, "tfoot", COLGROUP, COL),
                 this::replace
         );
     }
 
     public String replace(String content, Node node, Options options) {
         return switch (node.nodeName()) {
-            case "table" -> table(content, node);
-            case "th", "td" -> cell(content, node, false);
-            case "tr" -> row(content, node);
-            case "colgroup", "col" -> "";
+            case TABLE -> table(content, node);
+            case TH, TD -> cell(content, node, false);
+            case TR -> row(content, node);
+            case COLGROUP, COL -> "";
             default -> content;
         };
     }
 
     private String table(String content, Node node) {
         if (isNestedTable(node)) {
-            return node.outerHtml().trim().replaceAll("\n", "");
+            return node.outerHtml().trim().replace("\n", "");
         }
         return content;
     }
@@ -40,7 +49,7 @@ public class TableRule extends Rule {
     private boolean isNestedTable(Node node) {
         var parent = node.parent();
         while (parent != null) {
-            if (parent.nodeName().equals("table")) {
+            if (parent.nodeName().equals(TABLE)) {
                 ConversionReport.getInstance().addError("Nested table is not supported");
                 return true;
             }
@@ -67,9 +76,9 @@ public class TableRule extends Rule {
     private boolean isHeadingRow(Node tableRow) {
         var parentNode = tableRow.parentNode();
         assert parentNode != null;
-        return (parentNode.nodeName().equalsIgnoreCase("thead") ||
+        return (parentNode.nodeName().equalsIgnoreCase(THEAD) ||
                 (parentNode.firstChild() == tableRow &&
-                        (parentNode.nodeName().equalsIgnoreCase("table") || isFirstTbody(parentNode))
+                        (parentNode.nodeName().equalsIgnoreCase(TABLE) || isFirstTbody(parentNode))
                 )
         );
     }
@@ -79,10 +88,10 @@ public class TableRule extends Rule {
         while (previousSibling instanceof TextNode) {
             previousSibling = previousSibling.previousSibling();
         }
-        return (node.nodeName().equalsIgnoreCase("tbody") &&
+        return (node.nodeName().equalsIgnoreCase(TBODY) &&
                 (previousSibling == null ||
-                        (previousSibling.nodeName().equalsIgnoreCase("thead") && Pattern.compile("(?i)^\\s*$").matcher(node.outerHtml()).find()) ||
-                        (previousSibling.nodeName().equalsIgnoreCase("colgroup"))
+                        (previousSibling.nodeName().equalsIgnoreCase(THEAD) && Pattern.compile("(?i)^\\s*$").matcher(node.outerHtml()).find()) ||
+                        (previousSibling.nodeName().equalsIgnoreCase(COLGROUP))
                 )
         );
     }

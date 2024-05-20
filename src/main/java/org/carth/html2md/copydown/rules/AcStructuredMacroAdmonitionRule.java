@@ -15,7 +15,7 @@ public class AcStructuredMacroAdmonitionRule extends Rule {
                     String titlePart = title.map(Element::wholeText).orElse("");
                     boolean collapsed = collapse.map(Element::wholeText).orElse("false").equals("true");
                     return "\n" + (collapsed ? options.collapsedAdmonition : options.admonition) + " " + node.attr("ac:name") + " \""
-                            + titlePart + "\"" + content.replaceAll("\n", "\n    ");
+                            + titlePart + "\"" + content.replace("\n", "\n    ");
                 }
         );
     }

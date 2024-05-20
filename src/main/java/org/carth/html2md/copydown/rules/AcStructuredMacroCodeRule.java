@@ -24,7 +24,7 @@ public class AcStructuredMacroCodeRule extends Rule {
                     String codePart = code.wholeText();
                     if (collapsed) {
                         return options.collapsedAdmonition + " code \"" + (titlePart.isEmpty() ? "Code" : titlePart) + "\"\n" +
-                                ("\n" + options.fence + languagePart + "\n" + codePart + "\n" + options.fence + "\n").replaceAll("\n", "\n    ");
+                                ("\n" + options.fence + languagePart + "\n" + codePart + "\n" + options.fence + "\n").replace("\n", "\n    ");
                     }
                     return (titlePart.isEmpty() ? "" : "\n**" + titlePart + "**\n\n") +
                             options.fence + languagePart + "\n" + codePart + "\n" + options.fence + "\n";

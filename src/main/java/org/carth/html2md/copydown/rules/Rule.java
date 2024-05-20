@@ -11,7 +11,7 @@ import java.util.function.BiPredicate;
 import java.util.function.Function;
 
 @Getter
-abstract public class Rule {
+public abstract class Rule {
     private BiPredicate<Node, Options> filter = null;
     private Function<Options, String> append = null;
     private TriSupplier<String, Node, Options, String> replace = null;

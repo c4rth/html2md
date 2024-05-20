@@ -16,7 +16,7 @@ public class AcTaskListRule extends Rule {
                         return options.bulletListMaker + " [" + (complete ? "x" : " ") + "] " + content + "\n";
                     }
                     if (node.nodeName().equals("ac:task-body")) {
-                        return content.replaceAll("\n", "\n  ");
+                        return content.replace("\n", "\n  ");
                     }
                     return content;
                 }
