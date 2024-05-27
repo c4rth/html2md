@@ -1,13 +1,13 @@
 package org.carth.html2md.copydown.rules;
 
-import org.carth.html2md.copydown.CopyNode;
+import org.carth.html2md.copydown.JsoupUtils;
 
 public class BlankReplacementRule extends Rule {
 
     public BlankReplacementRule() {
         init(
-                (node, options) -> CopyNode.isBlank(node),
-                (content, node, options) -> CopyNode.isBlock(node) ? "\n\n" : ""
+                (node, options) -> JsoupUtils.isBlank(node),
+                (content, node, options) -> JsoupUtils.isBlock(node) ? "\n\n" : ""
         );
     }
 

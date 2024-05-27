@@ -1,6 +1,6 @@
 package org.carth.html2md.copydown.rules;
 
-import org.carth.html2md.copydown.CopyNode;
+import static org.carth.html2md.copydown.JsoupUtils.cleanAttribute;
 
 public class ImageRule extends Rule {
 
@@ -8,12 +8,12 @@ public class ImageRule extends Rule {
         init(
                 "img",
                 (content, node, options) -> {
-                    String alt = CopyNode.cleanAttribute(node.attr("alt"));
+                    String alt = cleanAttribute(node.attr("alt"));
                     String src = node.attr("src");
                     if (src.isEmpty()) {
                         return "";
                     }
-                    String title = CopyNode.cleanAttribute(node.attr("title"));
+                    String title = cleanAttribute(node.attr("title"));
                     String titlePart = "";
                     if (!title.isEmpty()) {
                         titlePart = " \"" + title + "\"";

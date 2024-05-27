@@ -4,7 +4,7 @@ import org.carth.html2md.copydown.Options;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 
-import static org.carth.html2md.copydown.CopyNode.cleanAttribute;
+import static org.carth.html2md.copydown.JsoupUtils.cleanAttribute;
 
 public class AcImageRule extends Rule {
 

@@ -41,6 +41,7 @@ public class TableRule extends Rule {
 
     private String table(String content, Node node) {
         if (isNestedTable(node)) {
+            // TODO: convert only non-standard HTML tags
             return node.outerHtml().trim().replace("\n", "");
         }
         return content;

@@ -42,14 +42,14 @@ public class CopyDown {
         setUp();
     }
 
+    private void setUp() {
+        rules = new Rules();
+    }
+
     public String convert(String content) {
         CopyNode copyRootNode = new CopyNode(content);
         String result = process(copyRootNode);
         return postProcess(result);
-    }
-
-    private void setUp() {
-        rules = new Rules();
     }
 
     private String process(CopyNode node) {

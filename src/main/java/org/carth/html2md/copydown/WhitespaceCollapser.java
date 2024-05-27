@@ -88,7 +88,7 @@ class WhitespaceCollapser {
         }
         if (prevText != null) {
             prevText.text(prevText.text().replaceAll(" $", ""));
-            if (prevText.text() == null) {
+            if (prevText.text().isEmpty()) {
                 remove(prevText);
             }
         }
@@ -129,12 +129,12 @@ class WhitespaceCollapser {
 
     private boolean isBlock(Node node) {
         // TODO allow to override with lambda in options
-        return CopyNode.isBlock(node) || node.nodeName().equals("br");
+        return JsoupUtils.isBlock(node) || node.nodeName().equals("br");
     }
 
     private boolean isVoid(Node node) {
         // Allow to override
-        return CopyNode.isVoid(node);
+        return JsoupUtils.isVoid(node);
     }
 
 }

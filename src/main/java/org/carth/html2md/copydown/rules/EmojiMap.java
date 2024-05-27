@@ -5,8 +5,6 @@ import java.util.Map;
 
 public class EmojiMap {
 
-    private EmojiMap() {}
-
     private static final Map<String, String> EMOJI_MAP = new HashMap<>();
 
     static {
@@ -1830,6 +1828,9 @@ public class EmojiMap {
         EMOJI_MAP.put("0030-20e3", ":zero:");
         EMOJI_MAP.put("1f910", ":zipper_mouth:");
         EMOJI_MAP.put("1f4a4", ":zzz:");
+    }
+
+    private EmojiMap() {
     }
 
     public static String getEmoji(String key) {

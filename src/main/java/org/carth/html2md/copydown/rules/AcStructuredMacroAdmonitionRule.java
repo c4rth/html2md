@@ -1,19 +1,17 @@
 package org.carth.html2md.copydown.rules;
 
-import org.carth.html2md.copydown.CopyNode;
 import org.jsoup.nodes.Element;
 
-import java.util.Optional;
+import static org.carth.html2md.copydown.JsoupUtils.getAcParameter;
+import static org.carth.html2md.copydown.JsoupUtils.isAcMacro;
 
 public class AcStructuredMacroAdmonitionRule extends Rule {
     public AcStructuredMacroAdmonitionRule() {
         init(
-                (node, options) -> CopyNode.isAcMacroWithName(node, "info", "warning", "note", "tip"),
+                (node, options) -> isAcMacro(node, "info", "warning", "note", "tip"),
                 (content, node, options) -> {
-                    Optional<Element> title = CopyNode.getAcParametertWithName((Element) node, "title");
-                    Optional<Element> collapse = CopyNode.getAcParametertWithName((Element) node, "collapse");
-                    String titlePart = title.map(Element::wholeText).orElse("");
-                    boolean collapsed = collapse.map(Element::wholeText).orElse("false").equals("true");
+                    String titlePart = getAcParameter(node, "title").map(Element::wholeText).orElse("");
+                    boolean collapsed = getAcParameter(node, "collapse").map(Element::wholeText).orElse("false").equals("true");
                     return "\n" + (collapsed ? options.collapsedAdmonition : options.admonition) + " " + node.attr("ac:name") + " \""
                             + titlePart + "\"" + content.replace("\n", "\n    ");
                 }
