@@ -1,0 +1,7 @@
+<ac:layout>
+    <ac:layout-section ac:type="three_with_sidebars">
+        <ac:layout-cell>
+        <a href="https://www.google.com" title="Google">Visit google</a>
+        </ac:layout-cell>
+    </ac:layout-section>
+</ac:layout>

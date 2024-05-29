@@ -1,14 +1,23 @@
 package org.carth.html2md.report;
 
-import lombok.extern.slf4j.Slf4j;
+import org.carth.html2md.log.Loggable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Slf4j
-public class ConversionReport {
+public class ConversionReport implements Loggable {
+
+    private static final Logger logger = LoggerFactory.getLogger(ConversionReport.class);
+
+    @Override
+    public Logger getLogger() {
+        return logger;
+    }
+
     private static ConversionReport instance = null;
     private final Map<String, List<Report>> reports = new HashMap<>();
     private String current = "";
@@ -37,17 +46,17 @@ public class ConversionReport {
     }
 
     public void report() {
-        log.info("{}Conversion report:{}", AnsiColors.CYAN, AnsiColors.RESET);
+        logInfoLn("{}Conversion report:{}", AnsiColors.CYAN, AnsiColors.RESET);
         reports.forEach((key, value) -> {
-            log.info("- {}:", key);
+            logInfoLn("- {}:", key);
             if (value.isEmpty()) {
-                log.info("{}", getMessage(AnsiColors.GREEN, Emoticon.OK, "OK"));
+                logInfoLn("{}", getMessage(AnsiColors.GREEN, Emoticon.OK, "OK"));
             } else {
                 value.forEach(report -> {
                     if (report.type() == ReportType.ERROR) {
-                        log.info("{}", getMessage(AnsiColors.RED, Emoticon.ERROR, report.description()));
+                        logInfoLn("{}", getMessage(AnsiColors.RED, Emoticon.ERROR, report.description()));
                     } else {
-                        log.info("{}", getMessage(AnsiColors.YELLOW, Emoticon.WARNING, report.description()));
+                        logInfoLn("{}", getMessage(AnsiColors.YELLOW, Emoticon.WARNING, report.description()));
                     }
                 });
             }

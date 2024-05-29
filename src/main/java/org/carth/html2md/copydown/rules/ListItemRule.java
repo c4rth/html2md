@@ -1,12 +1,19 @@
 package org.carth.html2md.copydown.rules;
 
-import lombok.extern.slf4j.Slf4j;
+import org.carth.html2md.log.Loggable;
 import org.jsoup.nodes.Element;
+import org.slf4j.LoggerFactory;
 
 import java.util.regex.Pattern;
 
-@Slf4j
-public class ListItemRule extends Rule {
+public class ListItemRule extends Rule implements Loggable {
+
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(ListItemRule.class);
+
+    @Override
+    public org.slf4j.Logger getLogger() {
+        return logger;
+    }
 
     public ListItemRule() {
         init(
@@ -26,7 +33,7 @@ public class ListItemRule extends Rule {
                             try {
                                 parsedStart = Integer.parseInt(start);
                             } catch (NumberFormatException e) {
-                                log.error("Unable to parse number", e);
+                                logError("Unable to parse number", e);
                             }
                         }
                         prefix = parsedStart + index + ".  ";

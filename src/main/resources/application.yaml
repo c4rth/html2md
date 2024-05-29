@@ -7,8 +7,8 @@ spring:
 app:
   logging:
     pattern:
-      normal: "%m%n"
-      #debug: "%clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(---){faint} %clr(${LOG_CORRELATION_PATTERN:-}){faint}%clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n"
+      #normal: "%m%n"
+      normal: ""
       debug: "%clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(---){faint} %clr(${LOG_CORRELATION_PATTERN:-}){faint}%clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n"
 
 logging:

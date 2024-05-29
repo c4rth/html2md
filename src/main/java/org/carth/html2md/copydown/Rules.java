@@ -1,14 +1,23 @@
 package org.carth.html2md.copydown;
 
-import lombok.extern.slf4j.Slf4j;
 import org.carth.html2md.copydown.rules.*;
+import org.carth.html2md.log.Loggable;
 import org.jsoup.nodes.Node;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Slf4j
-public class Rules {
+public class Rules implements Loggable {
+
+    private static final Logger logger = LoggerFactory.getLogger(Rules.class);
+
+    @Override
+    public Logger getLogger() {
+        return logger;
+    }
+
     public final List<Rule> allRules;
     public final List<String> references;
 
@@ -57,11 +66,11 @@ public class Rules {
     public Rule findRule(Node node, Options options) {
         for (Rule rule : allRules) {
             if (rule.getFilter().test(node, options)) {
-                log.trace("tag: '{}' -> rule: '{}'", node.nodeName(), rule.getName());
+                logTrace("tag: '{}' -> rule: '{}'", node.nodeName(), rule.getName());
                 return rule;
             }
         }
-        log.trace("tag: '{}' -> rule: NO rule found", node.nodeName());
+        logTrace("tag: '{}' -> rule: NO rule found", node.nodeName());
         return null;
     }
 

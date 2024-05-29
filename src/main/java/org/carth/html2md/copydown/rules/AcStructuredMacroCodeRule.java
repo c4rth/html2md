@@ -1,12 +1,10 @@
 package org.carth.html2md.copydown.rules;
 
-import lombok.extern.slf4j.Slf4j;
 import org.jsoup.nodes.Element;
 
 import static org.carth.html2md.copydown.JsoupUtils.getAcParameter;
 import static org.carth.html2md.copydown.JsoupUtils.isAcMacro;
 
-@Slf4j
 public class AcStructuredMacroCodeRule extends Rule {
 
     public AcStructuredMacroCodeRule() {

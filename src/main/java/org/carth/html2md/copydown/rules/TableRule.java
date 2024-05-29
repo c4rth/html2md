@@ -1,6 +1,5 @@
 package org.carth.html2md.copydown.rules;
 
-import lombok.extern.slf4j.Slf4j;
 import org.carth.html2md.copydown.Options;
 import org.carth.html2md.report.ConversionReport;
 import org.jsoup.nodes.Node;
@@ -10,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-@Slf4j
 public class TableRule extends Rule {
 
     private static final String TABLE = "table";

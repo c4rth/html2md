@@ -1,0 +1,10 @@
+<ac:layout><ac:layout-section ac:type="three_with_sidebars"><ac:layout-cell><p><br /></p></ac:layout-cell><ac:layout-cell>
+<u>Underline</u><br\>
+<em>Italics</em><br\>
+<sub>Subscript</sub><br\>
+<sup>Superscript</sup><br\>
+<code>Code = Monospace</code><br\>
+<pre>Preformatted</pre><br\>
+<small>Small</small><br\>
+<big>Big</big><br\>
+</ac:layout-cell></ac:layout-section></ac:layout>
