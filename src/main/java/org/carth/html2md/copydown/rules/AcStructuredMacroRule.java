@@ -9,9 +9,11 @@ public class AcStructuredMacroRule extends Rule {
                 (content, node, options) -> {
                     String acName = node.attr("ac:name");
                     if (acName.equals("tabs-group")) {
-                        ConversionReport.getInstance().addWarning("Tab group");
+                        ConversionReport.getInstance().addInfo("Tab group");
                     } else if (acName.contains("nav-grou")) {
-                        ConversionReport.getInstance().addWarning("Nav group");
+                        ConversionReport.getInstance().addInfo("Nav group");
+                    } else {
+                        ConversionReport.getInstance().addInfo("Confluence macro not supported: '"+acName+"'");
                     }
                     return content;
                 }

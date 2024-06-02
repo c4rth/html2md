@@ -5,37 +5,14 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.regex.Pattern;
 
 import static org.carth.html2md.copydown.JsoupUtils.isBlank;
 import static org.carth.html2md.copydown.JsoupUtils.isBlock;
 
 public class CopyNode {
-    private static final String[] VOID_ELEMENTS = {
-            "area", "base", "br", "col", "command", "embed", "hr", "img", "input",
-            "keygen", "link", "meta", "param", "source.test", "track", "wbr"
-    };
-    public static final Set<String> VOID_ELEMENTS_SET = new HashSet<>(Arrays.asList(VOID_ELEMENTS));
-    private static final String[] MEANINGFUL_WHEN_BLANK_ELEMENTS = {
-            "a", "table", "thead", "tbody", "tfoot", "th", "td", "iframe", "script",
-            "audio", "video"
-    };
-    public static final Set<String> MEANINGFUL_WHEN_BLANK_ELEMENTS_SET = new HashSet<>(Arrays.asList(MEANINGFUL_WHEN_BLANK_ELEMENTS));
-    private static final String[] BLOCK_ELEMENTS = {
-            "address", "article", "aside", "audio", "blockquote", "body", "canvas",
-            "center", "dd", "dir", "div", "dl", "dt", "fieldset", "figcaption", "figure",
-            "footer", "form", "frameset", "h1", "h2", "h3", "h4", "h5", "h6", "header",
-            "hgroup", "hr", "html", "isindex", "li", "main", "menu", "nav", "noframes",
-            "noscript", "ol", "output", "p", "pre", "section", "table", "tbody", "td",
-            "tfoot", "th", "thead", "tr", "colgroup", "col", "ul"
-    };
-    public static final Set<String> BLOCK_ELEMENTS_SET = new HashSet<>(Arrays.asList(BLOCK_ELEMENTS));
-
-    final Node node;
-    CopyNode parent;
+    public final Node node;
+    private CopyNode parent;
 
     CopyNode(String input) {
         // DOM parsers arrange elements in the <head> and <body>.

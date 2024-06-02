@@ -3,6 +3,7 @@ package org.carth.html2md.copydown;
 import org.carth.html2md.copydown.rules.Rule;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
+import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Component
 public class CopyDown {
 
     private static final Pattern leadingNewLinePattern = Pattern.compile("^(\n*)");
@@ -30,19 +32,10 @@ public class CopyDown {
             new Escape("_", "\\\\_"),
             new Escape("^(\\d+)\\. ", "$1\\\\. ")
     );
-    private Rules rules;
+    private final Rules rules;
 
     public CopyDown() {
         this.options = Options.builder().build();
-        setUp();
-    }
-
-    public CopyDown(Options options) {
-        this.options = options;
-        setUp();
-    }
-
-    private void setUp() {
         rules = new Rules();
     }
 

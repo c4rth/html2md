@@ -4,28 +4,48 @@ import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 import java.util.regex.Pattern;
 
-import static org.carth.html2md.copydown.CopyNode.*;
-
 public class JsoupUtils {
+
+    private static final String[] VOID_ELEMENTS = {
+            "area", "base", "br", "col", "command", "embed", "hr", "img", "input",
+            "keygen", "link", "meta", "param", "source.test", "track", "wbr"
+    };
+    public static final Set<String> VOID_ELEMENTS_SET = new HashSet<>(Arrays.asList(VOID_ELEMENTS));
+    private static final String[] MEANINGFUL_WHEN_BLANK_ELEMENTS = {
+            "a", "table", "thead", "tbody", "tfoot", "th", "td", "iframe", "script",
+            "audio", "video"
+    };
+    public static final Set<String> MEANINGFUL_WHEN_BLANK_ELEMENTS_SET = new HashSet<>(Arrays.asList(MEANINGFUL_WHEN_BLANK_ELEMENTS));
+    private static final String[] BLOCK_ELEMENTS = {
+            "address", "article", "aside", "audio", "blockquote", "body", "canvas",
+            "center", "dd", "dir", "div", "dl", "dt", "fieldset", "figcaption", "figure",
+            "footer", "form", "frameset", "h1", "h2", "h3", "h4", "h5", "h6", "header",
+            "hgroup", "hr", "html", "isindex", "li", "main", "menu", "nav", "noframes",
+            "noscript", "ol", "output", "p", "pre", "section", "table", "tbody", "td",
+            "tfoot", "th", "thead", "tr", "colgroup", "col", "ul"
+    };
+    public static final Set<String> BLOCK_ELEMENTS_SET = new HashSet<>(Arrays.asList(BLOCK_ELEMENTS));
 
     private static final String AC_NAME = "ac:name";
 
     private JsoupUtils() {
     }
 
-    static boolean isNodeTypeElement(Node node) {
+    public static boolean isNodeTypeElement(Node node) {
         return node instanceof Element;
     }
 
-    static boolean isNodeTypeText(Node node) {
+    public static boolean isNodeTypeText(Node node) {
         return node.nodeName().equals("text") || node.nodeName().equals("#text");
     }
 
     // CDATA section node
-    static boolean isNodeTypeCData(Node node) {
+    public static boolean isNodeTypeCData(Node node) {
         return node.nodeName().equals("#cdata");
     }
 

@@ -17,7 +17,7 @@ public class FileUtils {
     }
 
     public static String writeFile(String filename, String markdown) throws IOException {
-        Path path = Paths.get(filename + ".md");
+        Path path = Paths.get(filename);
         Files.writeString(path, markdown);
         return path.toAbsolutePath().toString();
     }

@@ -51,6 +51,7 @@ public class Rules implements Loggable {
         addRule("acStructuredMacroTabNav", new AcStructuredMacroTabNavRule());
         addRule("acStructuredMacroAdmonition", new AcStructuredMacroAdmonitionRule());
         addRule("acStructuredMacroStatus", new AcStructuredMacroStatusRule());
+        addRule("acStructuredMacroTocRule", new AcStructuredMacroTocRule());
         addRule("acStructuredMacroCode", new AcStructuredMacroCodeRule());
         addRule("acStructuredMacroGliffy", new AcStructuredMacroGliffyRule());
         addRule("acTaskList", new AcTaskListRule());

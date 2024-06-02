@@ -45,26 +45,26 @@ public class ConversionReport implements Loggable {
         this.reports.get(current).add(new Report(ReportType.WARNING, description));
     }
 
+    public void addInfo(String description) {
+        this.reports.get(current).add(new Report(ReportType.INFO, description));
+    }
+
     public void report() {
         logInfoLn("{}Conversion report:{}", AnsiColors.CYAN, AnsiColors.RESET);
         reports.forEach((key, value) -> {
             logInfoLn("- {}:", key);
             if (value.isEmpty()) {
-                logInfoLn("{}", getMessage(AnsiColors.GREEN, Emoticon.OK, "OK"));
+                logInfoLn("{}", getMessage(ReportType.OK, "OK"));
             } else {
                 value.forEach(report -> {
-                    if (report.type() == ReportType.ERROR) {
-                        logInfoLn("{}", getMessage(AnsiColors.RED, Emoticon.ERROR, report.description()));
-                    } else {
-                        logInfoLn("{}", getMessage(AnsiColors.YELLOW, Emoticon.WARNING, report.description()));
-                    }
+                    logInfoLn("{}", getMessage(report.type(), report.description()));
                 });
             }
         });
     }
 
-    private String getMessage(String color, String emoticon, String message) {
-        return " %s %s %s%s".formatted(color, emoticon, message, AnsiColors.RESET);
+    private String getMessage(ReportType type, String message) {
+        return " %s %s %s%s".formatted(type.getColor(), type.getText(), message, AnsiColors.RESET);
     }
 
 }
