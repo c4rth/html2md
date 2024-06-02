@@ -16,7 +16,7 @@ public class EmbeddedResources {
 
     public Resource get(Integer id) {
         if (resourceMap == null) {
-            resourceMap = new HashMap<Integer, Resource>();
+            resourceMap = new HashMap<>();
             for (Resource r : resources) {
                 resourceMap.put(r.id, r);
             }

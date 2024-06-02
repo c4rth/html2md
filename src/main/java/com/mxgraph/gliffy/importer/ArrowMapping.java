@@ -14,7 +14,7 @@ public class ArrowMapping {
     }
 
     private static void init() {
-        mapping = new HashMap<Integer, ArrowStyle>();
+        mapping = new HashMap<>();
         mapping.put(0, new ArrowStyle("none", false));
         mapping.put(1, new ArrowStyle(mxConstants.ARROW_OPEN, false));
         mapping.put(2, new ArrowStyle(mxConstants.ARROW_BLOCK, true));

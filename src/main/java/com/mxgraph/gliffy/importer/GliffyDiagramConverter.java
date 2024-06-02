@@ -47,8 +47,8 @@ public class GliffyDiagramConverter {
      * @param gliffyDiagramString JSON string of a gliffy diagram
      */
     public GliffyDiagramConverter(String gliffyDiagramString) {
-        vertices = new LinkedHashMap<String, GliffyObject>();
-        layers = new LinkedHashMap<String, GliffyLayer>();
+        vertices = new LinkedHashMap<>();
+        layers = new LinkedHashMap<>();
         this.diagramString = gliffyDiagramString;
         drawioDiagram = new mxGraphHeadless();
         //Disable parent (groups) auto extend feature as it miss with the coordinates of vsdx format
@@ -184,8 +184,7 @@ public class GliffyDiagramConverter {
     }
 
     private void sortLayersByOrder(List<GliffyLayer> values) {
-        Comparator<GliffyLayer> c = (o1, o2) -> o1.order - o2.order;
-
+        Comparator<GliffyLayer> c = Comparator.comparingInt(o -> o.order);
         values.sort(c);
     }
 
@@ -270,7 +269,6 @@ public class GliffyDiagramConverter {
         return orthogonal;
     }
 
-    ;
 
     /**
      * Sets the waypoints
@@ -290,7 +288,7 @@ public class GliffyDiagramConverter {
             return;
         }
 
-        List<mxPoint> mxPoints = new ArrayList<mxPoint>();
+        List<mxPoint> mxPoints = new ArrayList<>();
 
         mxPoint pivot = new mxPoint(object.x + object.width / 2, object.y + object.height / 2);
 
@@ -348,7 +346,7 @@ public class GliffyDiagramConverter {
 
         if (orthogonal) {
             cell.setStyle(cell.getStyle() + "edgeStyle=orthogonalEdgeStyle;");
-            List<mxPoint> result = new ArrayList<mxPoint>();
+            List<mxPoint> result = new ArrayList<>();
 
             // Removes duplicate waypoints
             if (!mxPoints.isEmpty()) {
@@ -743,7 +741,7 @@ public class GliffyDiagramConverter {
                     String rot = m.group(1);
                     float initialRotation = Float.parseFloat(rot);
                     float rotation = initialRotation + gliffyObject.rotation;
-                    String tmp = m.replaceFirst("rotation=" + Float.toString(rotation));
+                    String tmp = m.replaceFirst("rotation=" + rotation);
                     style.setLength(0);
                     style.append(tmp);
                 }
@@ -753,7 +751,7 @@ public class GliffyDiagramConverter {
                     double w = geometry.getWidth();
                     double h = geometry.getHeight();
                     geometry.setX(geometry.getX() + (w - h) / 2);
-                    geometry.setY(geometry.getY() + +(h - w) / 2);
+                    geometry.setY(geometry.getY() + (h - w) / 2);
                     geometry.setWidth(h);
                     geometry.setHeight(w);
 
@@ -878,7 +876,7 @@ public class GliffyDiagramConverter {
             Long oldPageId = Long.parseLong(pagem.group(1));
             if (namem.find()) {
                 String oldDiagramName = namem.group(1);
-                return new AbstractMap.SimpleEntry<Long, String>(oldPageId, oldDiagramName);
+                return new AbstractMap.SimpleEntry<>(oldPageId, oldDiagramName);
             }
         }
         return null;

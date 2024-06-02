@@ -1,10 +1,12 @@
 package org.carth.html2md.gliffy;
 
 import com.mxgraph.gliffy.importer.GliffyDiagramConverter;
+import lombok.extern.slf4j.Slf4j;
 import org.carth.html2md.utils.FileUtils;
 
 import java.io.IOException;
 
+@Slf4j
 public class GliffyParser {
 
     public static void main(String[] args) {
@@ -19,7 +21,7 @@ public class GliffyParser {
                  FileUtils.writeFile(baseDir + file + ".drawio", drawIo);
              }
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
         }
     }
 }

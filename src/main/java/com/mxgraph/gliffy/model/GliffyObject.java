@@ -12,13 +12,13 @@ import java.util.*;
  * Class representing Gliffy diagram object
  */
 public class GliffyObject implements PostDeserializer.PostDeserializable {
-    private static final Set<String> GRAPHICLESS_SHAPES = new HashSet<String>();
-    private static final Set<String> GROUP_SHAPES = new HashSet<String>();
+    private static final Set<String> GRAPHICLESS_SHAPES = new HashSet<>();
+    private static final Set<String> GROUP_SHAPES = new HashSet<>();
     private static final Set<String> MINDMAP_SHAPES = new HashSet<>();
     private static final Set<String> FILLCLR_IS_STROKECLR_SHAPES = new HashSet<>();
     private static final Map<String, double[]> SHAPES_COORD_FIX = new HashMap<>();
-    public static Set<String> FORCE_CONSTRAINTS_SHAPES = new HashSet<String>();
-    public static Set<String> DEEPLY_NESTED_LINKS = new HashSet<String>();
+    public static Set<String> FORCE_CONSTRAINTS_SHAPES = new HashSet<>();
+    public static Set<String> DEEPLY_NESTED_LINKS = new HashSet<>();
 
     static {
         GRAPHICLESS_SHAPES.add("com.gliffy.shape.uml.uml_v1.default.package");
@@ -442,12 +442,7 @@ public class GliffyObject implements PostDeserializer.PostDeserializable {
         }
 
         //sorts the list to find the leftmost child and it's X
-        Comparator<GliffyObject> cx = new Comparator<GliffyObject>() {
-            @Override
-            public int compare(GliffyObject o1, GliffyObject o2) {
-                return (int) (o1.x - o2.x);
-            }
-        };
+        Comparator<GliffyObject> cx = (o1, o2) -> (int) (o1.x - o2.x);
 
         children.sort(cx);
         float xMin = children.getFirst().x;
@@ -461,12 +456,7 @@ public class GliffyObject implements PostDeserializer.PostDeserializable {
         }
 
         //sorts the list to find the uppermost child and it's Y
-        Comparator<GliffyObject> cy = new Comparator<GliffyObject>() {
-            @Override
-            public int compare(GliffyObject o1, GliffyObject o2) {
-                return (int) (o1.y - o2.y);
-            }
-        };
+        Comparator<GliffyObject> cy = (o1, o2) -> (int) (o1.y - o2.y);
 
         children.sort(cy);
         float yMin = children.getFirst().y;

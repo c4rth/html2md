@@ -17,9 +17,6 @@ public class DashStyleMapping {
             // ignore
         }
 
-        StringBuilder mxPattern = new StringBuilder("dashed=1;fixDash=1;dashPattern=");
-        mxPattern.append(String.join(" ", pattern));
-        mxPattern.append(";");
-        return mxPattern.toString();
+        return "dashed=1;fixDash=1;dashPattern=" + String.join(" ", pattern) +";";
     }
 }

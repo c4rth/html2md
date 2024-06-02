@@ -45,11 +45,9 @@ public class SVGImporterUtils {
     }
 
     private String getNewViewBox(String svgString) throws Exception {
-        String result = null;
         Object svg = createSVGDocument(svgString);
         buildDocument(svg);
-        result = getViewBoxString(svg);
-        return result;
+        return getViewBoxString(svg);
     }
 
     private Object createSVGDocument(String svgString) throws Exception {
@@ -58,8 +56,7 @@ public class SVGImporterUtils {
         Method myMethod = myClass.getDeclaredMethod("createSVGDocument", String.class, InputStream.class);
         String param = null;
         Object newInstance = myClass.getConstructor(String.class).newInstance(param);
-        Object o = myMethod.invoke(newInstance, "http://www.w3.org/2000/svg", stream);
-        return o;
+        return myMethod.invoke(newInstance, "http://www.w3.org/2000/svg", stream);
     }
 
     private void buildDocument(Object svg) throws Exception {
